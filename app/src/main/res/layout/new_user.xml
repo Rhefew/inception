@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e1e1e"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <EditText
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Usuario"
+        android:textColorHint="#3b3b3b"
+        android:textCursorDrawable="@android:drawable/status_bar_item_app_background"
+        android:textColor="#e8e8e8"
+        android:id="@+id/txtUserName" />
+
+
+    <EditText
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:textColorHint="#3b3b3b"
+        android:inputType="textPassword"
+        android:textColor="#e8e8e8"
+        android:id="@+id/txtPassword1" />
+
+    <EditText
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirmar contraseña"
+        android:inputType="textPassword"
+        android:textColorHint="#3b3b3b"
+        android:textColor="#e8e8e8"
+        android:id="@+id/txtPassword2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresar"
+            android:id="@+id/btnLogin"
+            android:onClick="login"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Registrarse"
+            android:id="@+id/txtShowRegister"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrarse"
+            android:id="@+id/btnRegister"
+            android:onClick="register"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+</LinearLayout>
