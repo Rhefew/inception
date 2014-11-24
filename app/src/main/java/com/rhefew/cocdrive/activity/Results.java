@@ -1,8 +1,12 @@
-package com.rhefew.cocdrive;
+package com.rhefew.cocdrive.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+
+import com.rhefew.cocdrive.Cons;
+import com.rhefew.cocdrive.R;
+import com.rhefew.cocdrive.ResultsView;
 
 /**
  * Created by rodrigo on 20/11/14.
@@ -14,12 +18,13 @@ public class Results extends Activity {
         setContentView(R.layout.results);
 
         LinearLayout llResultsMaster = (LinearLayout)findViewById(R.id.llResultsMaster);
-        for(int i=0; i< Cons.results.optInt("count"); i++){
+        for(int i=0; i< Cons.results.getCount(); i++){
+
             /*Adding results to ResultsView rows*/
-            String member = Cons.results.optJSONArray("members").optString(i);
-            int value = Cons.results.optJSONArray("votations").optInt(i);
+            String member = Cons.results.getMembers().optString(i);
+            int value = Cons.results.getVotations().optInt(i);
             if(value == Cons.value){
-                llResultsMaster.addView(new ResultsView(this, member, value, Cons.results.optJSONArray("comments").optString(i)));
+                llResultsMaster.addView(new ResultsView(this, member, value, Cons.results.getComments().optString(i)));
             }
         }
     }

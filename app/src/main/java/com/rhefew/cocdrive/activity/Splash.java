@@ -1,15 +1,11 @@
-package com.rhefew.cocdrive;
+package com.rhefew.cocdrive.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.SystemClock;
-import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,23 +18,20 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.interfaces.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Legend;
+import com.rhefew.cocdrive.Cons;
+import com.rhefew.cocdrive.JSONParser;
+import com.rhefew.cocdrive.Print;
+import com.rhefew.cocdrive.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
 
 public class Splash extends Activity {
 
     PieChart mChart;
+    WarInfo info;
 
     @SuppressLint("NewApi")
     @Override
@@ -47,6 +40,79 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
 
         initCountDown();
+        initPieChart();
+
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                JSONParser parser = new JSONParser();
+                try {
+                    JSONObject o = parser.getJSON("http://inceptioncoc.comeze.com/");
+                    info = new WarInfo(o);
+                } catch (Exception e) {
+
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+//                TextView txtPercent = (TextView)findViewById(R.id.txtPercent);
+
+                float count = 0;
+
+                float agree = 0;
+                float disagree = 0;
+                if(info != null) {
+                    for (int i = 0; i < info.getCount(); i++) {
+                        int votevalue = info.getVotations().optInt(i);
+                        count++;
+                        if(votevalue>0) {
+                            if (votevalue == 2) {
+                                agree++;
+                            } else {
+                                disagree++;
+                            }
+                        }
+                    }
+
+                    float porcentaje = (agree / count * 100);
+
+                    setData(agree,disagree,(count-agree-disagree), 100);
+
+                    // add a selection listener
+                    mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                        @Override
+                        public void onValueSelected(Entry e, int dataSetIndex) {
+                            Cons.results = info;
+                            Cons.value = e.getXIndex();
+                            startActivity(new Intent(Splash.this, Results.class));
+
+                        }
+
+                        @Override
+                        public void onNothingSelected() {
+
+                        }
+                    });
+                    if (porcentaje >= 60) {
+
+                        ((TextView) findViewById(R.id.txtMensaje)).setText("Se inicia la guerra");
+                    }
+                }else{
+                    Print.dialog(Splash.this, "No se realizaron votaciones");
+                }
+            }
+        }.execute();
+
+        Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
+
+    }
+
+    private void initPieChart() {
         mChart = (PieChart) findViewById(R.id.chart);
 
         // change the color of the center-hole
@@ -88,109 +154,11 @@ public class Splash extends Activity {
 //        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
 //        l.setXEntrySpace(7f);
 //        l.setYEntrySpace(5f);
-
-        new AsyncTask<Void, Void, Void>(){
-
-            JSONObject o;
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                JSONParser parser = new JSONParser();
-                try {
-                    o = parser.getJSON("http://inceptioncoc.comeze.com/");
-                } catch (Exception e) {
-                    o = new JSONObject();
-                    try {
-                        JSONArray values = new JSONArray("values");
-                        values.put(0);
-                        o.put("values", values);
-
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-//                TextView txtPercent = (TextView)findViewById(R.id.txtPercent);
-
-                float count = 0;
-
-                float agree = 0;
-                float disagree = 0;
-                if(o != null) {
-                    for (int i = 0; i < o.optJSONArray("votations").length(); i++) {
-                        int votevalue = o.optJSONArray("votations").optInt(i);
-                        count++;
-                        if(votevalue>0) {
-                            if (votevalue == 2) {
-                                agree++;
-                            } else {
-                                disagree++;
-                            }
-                        }
-                    }
-
-                    float porcentaje = (agree / count * 100);
-
-                    setData(agree,disagree,(count-agree-disagree), 100);
-
-                    // add a selection listener
-                    mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-                        @Override
-                        public void onValueSelected(Entry e, int dataSetIndex) {
-                            Cons.results = o;
-                            Cons.value = e.getXIndex();
-                            startActivity(new Intent(Splash.this, Results.class));
-
-                        }
-
-                        @Override
-                        public void onNothingSelected() {
-
-                        }
-                    });
-                    if (porcentaje >= 60) {
-
-                        ((TextView) findViewById(R.id.txtMensaje)).setText("Se inicia la guerra");
-                    }
-                }else{
-                    Print.dialog(Splash.this, "No se realizaron votaciones");
-                }
-            }
-        }.execute();
-
-        Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
-
     }
 
     private void initCountDown() {
 
         ((TextView)findViewById(R.id.txtTimer)).setText("Votación abierta hasta las 22:00");
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.splash, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void createWar(){

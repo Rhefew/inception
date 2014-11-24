@@ -1,4 +1,4 @@
-package com.rhefew.cocdrive;
+package com.rhefew.cocdrive.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.rhefew.cocdrive.Cons;
+import com.rhefew.cocdrive.JSONParser;
+import com.rhefew.cocdrive.Print;
+import com.rhefew.cocdrive.R;
 
 import org.json.JSONObject;
 

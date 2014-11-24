@@ -1,5 +1,7 @@
 package com.rhefew.cocdrive;
 
+import com.rhefew.cocdrive.activity.WarInfo;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,7 +10,7 @@ import org.json.JSONObject;
  */
 public class Cons {
 
-    public static JSONObject results;
+    public static WarInfo results;
 
     public static int value;
     public static String member;

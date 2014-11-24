@@ -11,7 +11,7 @@
         android:label="Inception"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" >
 
-        <activity android:name=".NewUser">
+        <activity android:name=".activity.NewUser">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,9 @@
         </activity>
 
         <activity
-            android:name=".Splash" />
+            android:name=".activity.Splash" />
 
-        <activity android:name=".Results"/>
+        <activity android:name=".activity.Results"/>
     </application>
 
 </manifest>
