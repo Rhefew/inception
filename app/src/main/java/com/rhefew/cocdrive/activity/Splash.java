@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +20,7 @@ import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
 import com.rhefew.cocdrive.R;
+import com.rhefew.cocdrive.WarInfo;
 
 import org.json.JSONObject;
 
@@ -60,7 +59,6 @@ public class Splash extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-//                TextView txtPercent = (TextView)findViewById(R.id.txtPercent);
 
                 float count = 0;
 
@@ -100,7 +98,14 @@ public class Splash extends Activity {
                     });
                     if (porcentaje >= 60) {
 
-                        ((TextView) findViewById(R.id.txtMensaje)).setText("Se inicia la guerra");
+                        ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
+                        if(info.getStatus_code() > 1){
+                            TextView txtAgainst = (TextView)findViewById(R.id.txtAgainst);
+                            txtAgainst.setVisibility(View.VISIBLE);
+                            txtAgainst.setText("Enemigo: " + info.getAgainst());
+                        }
+
+
                     }
                 }else{
                     Print.dialog(Splash.this, "No se realizaron votaciones");
