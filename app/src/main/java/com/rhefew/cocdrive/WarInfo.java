@@ -16,9 +16,13 @@ public class WarInfo {
     private String status;
     private String against;
 
+    /*Member > votations > comments*/
     private JSONArray members;
     private JSONArray votations;
     private JSONArray comments;
+
+    /*Members global star stats*/
+    private JSONObject member_stars;
 
     public WarInfo(JSONObject o) {
         this.war = o.optInt("war");
@@ -32,6 +36,7 @@ public class WarInfo {
         this.maxstars = o.optInt("maxstars");
         this.heroic_attack = o.optString("heroic_attack");
         this.heroic_defense = o.optString("heroic_defense");
+        this.member_stars = o.optJSONObject("member_stars");
     }
 
     public int getWar() {
@@ -120,6 +125,14 @@ public class WarInfo {
 
     public int getStatus_code() {
         return status_code;
+    }
+
+    public JSONObject getMember_stars() {
+        return member_stars;
+    }
+
+    public void setMember_stars(JSONObject member_stars) {
+        this.member_stars = member_stars;
     }
 }
 

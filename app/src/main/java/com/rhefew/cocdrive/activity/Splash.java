@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.rhefew.cocdrive.WarInfo;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -247,5 +250,10 @@ public class Splash extends Activity {
                 super.onPostExecute(s);
             }
         }.execute();
+    }
+
+    public void openStats(View view){
+        Cons.results = info;
+        startActivity(new Intent(Splash.this, MemberStats.class));
     }
 }

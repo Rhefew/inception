@@ -191,9 +191,12 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleData<? exte
 
         // make sure the graph values and grid cannot be drawn outside the
         // content-rect
-        int clipRestoreCount = mDrawCanvas.save();
-        mDrawCanvas.clipRect(mContentRect);
+        int clipRestoreCount = 0;
+        try {
+            clipRestoreCount = mDrawCanvas.save();
 
+        mDrawCanvas.clipRect(mContentRect);
+        }catch (Exception e){}
         drawHorizontalGrid();
 
         drawVerticalGrid();
@@ -207,8 +210,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleData<? exte
             drawHighlights();
 
         // Removes clipping rectangle
-        mDrawCanvas.restoreToCount(clipRestoreCount);
-
+        try {
+            mDrawCanvas.restoreToCount(clipRestoreCount);
         drawAdditional();
 
         drawXLabels();
@@ -229,6 +232,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleData<? exte
 
         if (mLogEnabled)
             Log.i(LOG_TAG, "DrawTime: " + (System.currentTimeMillis() - starttime) + " ms");
+        }catch (Exception e){}
     }
 
     /**
@@ -834,8 +838,11 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleData<? exte
             position[1] = mYLabels.mEntries[i];
             mTrans.pointValuesToPixel(position);
 
-            mDrawCanvas.drawLine(mOffsetLeft, position[1], getWidth() - mOffsetRight, position[1],
-                    mGridPaint);
+            try {
+                mDrawCanvas.drawLine(mOffsetLeft, position[1], getWidth() - mOffsetRight, position[1],
+                        mGridPaint);
+            }catch (Exception e ){}
+
         }
     }
 

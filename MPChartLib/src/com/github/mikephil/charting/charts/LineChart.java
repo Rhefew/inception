@@ -250,7 +250,10 @@ public class LineChart extends BarLineChartBase<LineData> {
                     Path line = generateLinePath(entries);
                     mTrans.pathValueToPixel(line);
 
-                    mDrawCanvas.drawPath(line, mRenderPaint);
+                    try {
+                        mDrawCanvas.drawPath(line, mRenderPaint);
+                    }catch (Exception e){}
+
                 }
 
                 mRenderPaint.setPathEffect(null);

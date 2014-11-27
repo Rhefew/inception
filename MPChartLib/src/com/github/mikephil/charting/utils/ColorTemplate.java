@@ -42,6 +42,9 @@ public class ColorTemplate {
     public static final int[] GOOGLE_COLORS = {
             Color.parseColor("#6E7789") , Color.parseColor("#D74336"),  Color.parseColor("#0F8E52")
     };
+    public static final int[] STARS_COLORS = {
+        Color.parseColor("#CE0000"),  Color.parseColor("#CE7600"), Color.parseColor("#CEAA00"), Color.parseColor("#A5C700")
+    };
 
     // public static final int[] FRESH_COLORS = {
     // R.color.fresh_1, R.color.fresh_2, R.color.fresh_3, R.color.fresh_4,

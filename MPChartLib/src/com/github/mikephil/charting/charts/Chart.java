@@ -486,14 +486,17 @@ public abstract class Chart<T extends ChartData<? extends DataSet<? extends Entr
 
         if (mDrawBitmap == null || mDrawCanvas == null) {
 
-            mDrawBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
-                    Bitmap.Config.ARGB_4444);
-            mDrawCanvas = new Canvas(mDrawBitmap);
+            try {
+                mDrawBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                        Bitmap.Config.ARGB_4444);
+                mDrawCanvas = new Canvas(mDrawBitmap);
+            }catch (Exception e){}
         }
 
         // clear everything
-        mDrawBitmap.eraseColor(Color.TRANSPARENT);
-
+        try {
+            mDrawBitmap.eraseColor(Color.TRANSPARENT);
+        }catch (Exception e){}
         // mDrawCanvas.drawColor(Color.WHITE);
         // canvas.drawColor(Color.TRANSPARENT,
         // android.graphics.PorterDuff.Mode.XOR); // clear all
@@ -2194,13 +2197,14 @@ public abstract class Chart<T extends ChartData<? extends DataSet<? extends Entr
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
         // create a new bitmap with the new dimensions
-        mDrawBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
-        mDrawCanvas = new Canvas(mDrawBitmap);
+        try {
+            mDrawBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
+            mDrawCanvas = new Canvas(mDrawBitmap);
 
-        // prepare content rect and matrices
-        prepareContentRect();
-        prepare();
-
+            // prepare content rect and matrices
+            prepareContentRect();
+            prepare();
+        }catch(Exception e){}
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
