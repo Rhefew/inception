@@ -37,7 +37,7 @@ public class MemberStatsView extends LinearLayout {
     int stars_3;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public MemberStatsView(Context context, String member, int stars_0, int stars_1, int stars_2, int stars_3) {
+    public MemberStatsView(Context context, String member, int stars_0, int stars_1, int stars_2, int stars_3, boolean is_memory_low) {
         super(context);
 
         this.member = member;
@@ -52,7 +52,6 @@ public class MemberStatsView extends LinearLayout {
         txtMember.setText(member);
         txtMember.setPadding(5, 5, 5, 5);
         txtMember.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
-        txtMember.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         txtMember.setTextColor(Color.parseColor("#1b1b1b"));
 
         this.addView(txtMember);
@@ -71,16 +70,17 @@ public class MemberStatsView extends LinearLayout {
         chart.setMaxVisibleValueCount(60);
 
         // disable 3D
-        chart.set3DEnabled(true);
+        chart.set3DEnabled(false);
         // scaling can now only be done on x- and y-axis separately
         chart.setPinchZoom(false);
 
-        chart.setDrawBarShadow(true);
 
-        chart.setDrawVerticalGrid(true);
-        chart.setDrawHorizontalGrid(true);
-        chart.setDrawGridBackground(true);
-
+        if(!is_memory_low) {
+            chart.setDrawBarShadow(true);
+            chart.setDrawVerticalGrid(true);
+            chart.setDrawHorizontalGrid(true);
+            chart.setDrawGridBackground(true);
+        }
         XLabels xLabels = chart.getXLabels();
         xLabels.setPosition(XLabels.XLabelPosition.BOTTOM);
         xLabels.setCenterXLabelText(true);
@@ -90,7 +90,9 @@ public class MemberStatsView extends LinearLayout {
         chart.setDrawLegend(false);
 
         // add a nice and smooth animation
-        chart.animateY(2500);
+        if(!is_memory_low) {
+            chart.animateY(2500);
+        }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         yVals1.add(new BarEntry(stars_0, 0));
@@ -116,7 +118,8 @@ public class MemberStatsView extends LinearLayout {
         chart.invalidate();
 
 
-        this.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 350));
+        this.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 300));
+
         this.addView(chart);
 
     }

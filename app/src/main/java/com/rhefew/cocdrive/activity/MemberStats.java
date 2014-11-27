@@ -14,6 +14,15 @@ import org.json.JSONObject;
  * Created by rodrigo on 20/11/14.
  */
 public class MemberStats extends Activity {
+
+    boolean is_memory_low = false;
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        is_memory_low = true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +42,7 @@ public class MemberStats extends Activity {
                 int stars_1 = member.optInt("stars_1");
                 int stars_2 = member.optInt("stars_2");
                 int stars_3 = member.optInt("stars_3");
-                llMemberStats.addView(new MemberStatsView(getApplicationContext(), nickName, stars_0, stars_1, stars_2, stars_3));
+                llMemberStats.addView(new MemberStatsView(getApplicationContext(), nickName, stars_0, stars_1, stars_2, stars_3, is_memory_low));
 
             }catch (Exception e){
 

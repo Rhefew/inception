@@ -22,7 +22,7 @@ import java.util.zip.Inflater;
  * Created by rodrigo on 20/11/14.
  */
 public class ResultsView extends LinearLayout {
-    public ResultsView(final Activity context, String member, final int votation, String comment) {
+    public ResultsView(final Activity context, String member, final int votation, final String comment) {
         super(context);
 
         this.setPadding(10,10,10,10);
@@ -50,19 +50,18 @@ public class ResultsView extends LinearLayout {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
-                if(votation==1) {
+                if(comment!=null && !comment.equals("")) {
                     final LinearLayout llComment = (LinearLayout) result.findViewById(R.id.llComments);
 
-                    if(llComment.getVisibility() == View.GONE) {
-                        Animation animation = new TranslateAnimation(0,0,-100,0);
+                    if (llComment.getVisibility() == View.GONE) {
+                        Animation animation = new TranslateAnimation(0, 0, -100, 0);
                         animation.setDuration(500);
                         llComment.setAnimation(animation);
                         llComment.startAnimation(animation);
 
                         llComment.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        Animation animation = new TranslateAnimation(0,0,0,-100);
+                    } else {
+                        Animation animation = new TranslateAnimation(0, 0, 0, -100);
                         animation.setDuration(500);
                         llComment.setAnimation(animation);
                         llComment.startAnimation(animation);
@@ -72,7 +71,7 @@ public class ResultsView extends LinearLayout {
                             public void run() {
                                 llComment.setVisibility(View.GONE);
                             }
-                        },500);
+                        }, 500);
 
                     }
                 }

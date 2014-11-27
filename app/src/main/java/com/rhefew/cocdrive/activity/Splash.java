@@ -2,6 +2,7 @@ package com.rhefew.cocdrive.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -215,14 +217,26 @@ public class Splash extends Activity {
     }
 
     public void vote(View view){
-        if(view.getContentDescription().equals("Si")){
-            votar(2, "");
+
+        EditText txtComment = (EditText)findViewById(R.id.txtCommentSplash);
+        String comment = txtComment.getText().toString();
+        if(!txtComment.getText().toString().equals("")) {
+            if(comment.length() > 10) {
+                if (view.getContentDescription().equals("Si")) {
+                    votar(2, txtComment.getText().toString());
+                } else {
+                    votar(1, txtComment.getText().toString());
+                }
+            }else{
+                Print.dialog(Splash.this, "El comentario es muy corto");
+            }
         }else{
-            votar(1, "");
+            Print.dialog(Splash.this, "Escribí un comentario");
         }
     }
 
     private void votar(final int i, final String comment) {
+
         new AsyncTask<Void, Void, String>(){
 
             JSONObject o;
@@ -230,7 +244,7 @@ public class Splash extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://inceptioncoc.comeze.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment);
+                    o = parser.getJSON("http://inceptioncoc.comeze.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
 
                 } catch (Exception e) {
                     o = new JSONObject();
