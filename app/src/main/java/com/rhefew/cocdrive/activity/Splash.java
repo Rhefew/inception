@@ -52,7 +52,7 @@ public class Splash extends Activity {
             protected Void doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    JSONObject o = parser.getJSON("http://inceptioncoc.comeze.com/");
+                    JSONObject o = parser.getJSON("http://download.rhefew.com/");
                     info = new WarInfo(o);
                 } catch (Exception e) {
 
@@ -244,7 +244,7 @@ public class Splash extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://inceptioncoc.comeze.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
+                    o = parser.getJSON("http://download.rhefew.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
 
                 } catch (Exception e) {
                     o = new JSONObject();
