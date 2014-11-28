@@ -58,7 +58,7 @@ public class NewUser extends Activity {
                 protected String doInBackground(Void... params) {
                     JSONParser parser = new JSONParser();
                     try {
-                        o = parser.getJSON("http://coc.rhefew.com/new_user.php?member=" + user + "&password=" + password );
+                        o = parser.getJSON("http://coc.rhefew.com/new_user?member=" + user + "&password=" + password );
 
                     } catch (Exception e) {
                         o = new JSONObject();
@@ -103,7 +103,7 @@ public class NewUser extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://coc.rhefew.com/login.php?member=" + user + "&password=" + password );
+                    o = parser.getJSON("http://coc.rhefew.com/login?member=" + user + "&password=" + password );
 
                 } catch (Exception e) {
                     o = new JSONObject();

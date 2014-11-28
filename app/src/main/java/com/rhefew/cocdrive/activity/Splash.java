@@ -244,7 +244,7 @@ public class Splash extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://coc.rhefew.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
+                    o = parser.getJSON("http://coc.rhefew.com/send_vote?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
 
                 } catch (Exception e) {
                     o = new JSONObject();
