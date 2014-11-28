@@ -4,12 +4,31 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.rhefew.cocdrive.permission.C2D_MESSAGE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/inception"
         android:label="Inception"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" >
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <service android:name=".GcmIntentService" />
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        </intent-filter>
+
+        </receiver>
 
         <activity android:name=".activity.NewUser">
 

@@ -3,12 +3,17 @@ package com.rhefew.cocdrive.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +25,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.interfaces.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
@@ -29,6 +37,7 @@ import com.rhefew.cocdrive.WarInfo;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -37,11 +46,40 @@ public class Splash extends Activity {
     PieChart mChart;
     WarInfo info;
 
+
+    /*GCM*/
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    public static final String EXTRA_MESSAGE = "message";
+    public static final String PROPERTY_REG_ID = "registration_id";
+    private static final String PROPERTY_APP_VERSION = "appVersion";
+    private final static String TAG = "LaunchActivity";
+    protected String SENDER_ID = "151603048070";
+    private GoogleCloudMessaging gcm =null;
+    private String regid = null;
+    private Context context= null;
+    /*END GCM*/
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        context = this;
+        if (checkPlayServices())
+        {
+            gcm = GoogleCloudMessaging.getInstance(this);
+            regid = getRegistrationId(context);
+
+            if (regid.isEmpty())
+            {
+                registerInBackground();
+            }
+            else
+            {
+                Log.d(TAG, "No valid Google Play Services APK found.");
+            }
+        }
 
         initCountDown();
         initPieChart();
@@ -269,5 +307,90 @@ public class Splash extends Activity {
     public void openStats(View view){
         Cons.results = info;
         startActivity(new Intent(Splash.this, MemberStats.class));
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.d(TAG, "This device is not supported - Google Play Services.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private String getRegistrationId(Context context)
+    {
+        final SharedPreferences prefs = getGCMPreferences(context);
+        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+        if (registrationId.isEmpty()) {
+            Log.d(TAG, "Registration ID not found.");
+            return "";
+        }
+        int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = getAppVersion(context);
+        if (registeredVersion != currentVersion) {
+            Log.d(TAG, "App version changed.");
+            return "";
+        }
+        return registrationId;
+    }
+
+    private SharedPreferences getGCMPreferences(Context context)
+    {
+        return getSharedPreferences(Splash.class.getSimpleName(),Context.MODE_PRIVATE);
+    }
+
+    private static int getAppVersion(Context context)
+    {
+        try
+        {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
+
+
+    private void registerInBackground()
+    {
+        new AsyncTask<Void,Void,Void>(){
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                String msg = "";
+                try
+                {
+                    if (gcm == null)
+                    {
+                        gcm = GoogleCloudMessaging.getInstance(context);
+                    }
+
+                    regid = gcm.register(SENDER_ID);
+                    Log.d(TAG, "########################################");
+                    Log.d(TAG, "Current Device's Registration ID is: "+regid);
+                    Log.d(TAG, "########################################");
+                }
+                catch (IOException ex)
+                {
+                    msg = "Error :" + ex.getMessage();
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    @Override protected void onResume()
+    {
+        super.onResume();
+        checkPlayServices();
     }
 }
