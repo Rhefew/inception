@@ -282,7 +282,7 @@ public class Splash extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://coc.rhefew.com/send_vote?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
+                    o = parser.getJSON("http://coc.rhefew.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
 
                 } catch (Exception e) {
                     o = new JSONObject();
@@ -378,6 +378,8 @@ public class Splash extends Activity {
                     Log.d(TAG, "########################################");
                     Log.d(TAG, "Current Device's Registration ID is: "+regid);
                     Log.d(TAG, "########################################");
+                    
+                    sendRegID();
                 }
                 catch (IOException ex)
                 {
@@ -386,6 +388,27 @@ public class Splash extends Activity {
                 return null;
             }
         }.execute();
+    }
+
+    private void sendRegID() {
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                try {
+                    JSONParser parser = new JSONParser();
+                    parser.get("http://coc.rhefew.com/reg_id.php?id=" + regid);
+                }catch(Exception e ){
+                    Log.e(getApplicationContext().getPackageName(), e.getMessage());
+                    e.printStackTrace();
+                }
+
+                return null;
+
+            }
+        }.execute();
+
     }
 
     @Override protected void onResume()
