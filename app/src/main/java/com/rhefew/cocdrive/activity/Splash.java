@@ -47,6 +47,8 @@ public class Splash extends Activity {
 
     PieChart mChart;
     WarInfo info;
+    Bundle savedInstanceState;
+    ActionBar actionBar;
 
 
     /*GCM*/
@@ -65,9 +67,11 @@ public class Splash extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
+
         setContentView(R.layout.activity_splash);
 
-        final ActionBar actionBar = getActionBar();
+        actionBar = getActionBar();
 
         context = this;
         if (checkPlayServices())
@@ -85,8 +89,12 @@ public class Splash extends Activity {
             }
         }
 
-        initCountDown();
-        initPieChart();
+        loadWarInfo();
+        Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
+
+    }
+
+    private void loadWarInfo() {
 
         new AsyncTask<Void, Void, Void>(){
 
@@ -96,8 +104,6 @@ public class Splash extends Activity {
                 try {
                     JSONObject o = parser.getJSON("http://coc.rhefew.com/");
                     info = new WarInfo(o);
-                    assert actionBar != null;
-                    actionBar.setTitle(info.getStatus());
 
                     LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
                     if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
@@ -116,6 +122,12 @@ public class Splash extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+
+
+                actionBar.setTitle(info.getStatus());
+
+                initCountDown();
+                initPieChart();
 
                 float count = 0;
 
@@ -172,9 +184,6 @@ public class Splash extends Activity {
                 }
             }
         }.execute();
-
-        Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
-
     }
 
     private void createStatsView() {
@@ -272,7 +281,7 @@ public class Splash extends Activity {
     }
 
     public void refresh(View view){
-        onCreate(null);
+        loadWarInfo();
     }
 
     public void vote(View view){

@@ -2,10 +2,12 @@ package com.rhefew.cocdrive;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class ResultsView extends LinearLayout {
 
         TextView txtMember = (TextView) result.findViewById(R.id.txtUser);
         TextView txtComment = (TextView) result.findViewById(R.id.txtComment);
+        FrameLayout frameVoteColor = (FrameLayout) result.findViewById(R.id.frameVoteColor);
 
         if(comment!= null && comment!= ""){
             txtComment.setText(comment);
@@ -32,9 +35,9 @@ public class ResultsView extends LinearLayout {
 
         txtMember.setText(member);
         if(votation==1){
-            txtMember.setBackgroundResource(R.drawable.back_negative);
+            frameVoteColor.setBackgroundColor(Color.parseColor("#D74336"));
         }else if(votation==2){
-            txtMember.setBackgroundResource(R.drawable.back_positive);
+            frameVoteColor.setBackgroundColor(Color.parseColor("#0F8E52"));
         }
 
         result.setOnClickListener(new OnClickListener() {
