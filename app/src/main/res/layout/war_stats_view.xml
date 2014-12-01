@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <!--android:background="@drawable/selector_war_stats"-->
+
+        <TextView
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1b1b1b"
+            android:id="@+id/txtAgainstWarStats"
+            android:text="Inception vs Clan"
+            android:textColor="#e2e2e2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Máximo Estrellas"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtMaxStarsWarResults"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="45"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Resultado"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtResultWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="45 - 45"/>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3b3b3b"
+            android:text="Estadísticas"
+            android:textColor="#e2e2e2"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7b7b7b"
+            android:text="Héroes"
+            android:textColor="#e2e2e2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="En ataque"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtHeroicAttackWarstars"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Mejor ataque"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="En defensa"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtHeroicDefenseWarstars"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Mejor defensa"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7b7b7b"
+            android:text="Ataques"
+            android:textColor="#e2e2e2"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Usados"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtAttacksUsedWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="30"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Ganados"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtAttacksWonWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="15"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Perdidos"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtAttacksLostWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="5"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Restantes"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtAttacksRemainingWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="10"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#3b3b3b"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="★★★"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtThreeStarsWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="9"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="★★"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtTwoStarsWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="3"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="★"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtOnestarWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="9"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

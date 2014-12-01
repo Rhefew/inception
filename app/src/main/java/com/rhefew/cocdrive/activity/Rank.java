@@ -35,7 +35,7 @@ public class Rank extends Activity {
         LinearLayout llMemberStats = (LinearLayout)findViewById(R.id.llRank);
         for(int i=0; i< Cons.results.getMember_stars().length(); i++){
 
-            /*Adding results to ResultsView rows*/
+            /*Adding activity_results to ResultsView rows*/
             JSONObject member = Cons.results.getMember_stars().optJSONObject(String.valueOf(i+1));
             String nickName = member.optString("member");
             String stars = member.optString("total_stars");

@@ -35,7 +35,9 @@ import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
 import com.rhefew.cocdrive.R;
 import com.rhefew.cocdrive.WarInfo;
+import com.rhefew.cocdrive.WarStats;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -187,7 +189,35 @@ public class Splash extends Activity {
     }
 
     private void createStatsView() {
+        new AsyncTask<Void, Void, Void>(){
 
+            WarStats stats;
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                JSONParser parser = new JSONParser();
+                try {
+                    JSONObject json = parser.getJSON("http://coc.rhefew.com/wars_info.php");
+                    stats = new WarStats(json);
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                return null;
+
+
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
+                llMasterDetails.removeAllViews();
+                llMasterDetails.addView(new WarStatsView(stats));
+                super.onPostExecute(aVoid);
+            }
+        };
     }
 
     private void initPieChart() {

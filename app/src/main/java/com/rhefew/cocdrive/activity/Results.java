@@ -15,12 +15,12 @@ public class Results extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.results);
+        setContentView(R.layout.activity_results);
 
         LinearLayout llResultsMaster = (LinearLayout)findViewById(R.id.llResultsMaster);
         for(int i=0; i< Cons.results.getCount(); i++){
 
-            /*Adding results to ResultsView rows*/
+            /*Adding activity_results to ResultsView rows*/
             String member = Cons.results.getMembers().optString(i);
             int value = Cons.results.getVotations().optInt(i);
             if(value == Cons.value){
