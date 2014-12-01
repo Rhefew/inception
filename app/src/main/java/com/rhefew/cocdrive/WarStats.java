@@ -26,20 +26,20 @@ public class WarStats {
     public WarStats(JSONObject o){
         this.war = o.optInt("war");
         this.against = o.optString("against");
-        this.result = o.optString("result");
-        this.maxstars = o.optInt("maxtars");
-        this.heroic_defense = o.optString("heroic_defense");
-        this.heroic_attack = o.optString("heroic_attack");
-        this.attacks_used = o.optInt("attacks_used");
-        this.attacks_won = o.optInt("attacks_won");
-        this.attacks_lost = o.optInt("attacks_lost");
-        this.attacks_remaining = o.optInt("attacks_remaining");
-        this.three_stars = o.optInt("three_stars");
-        this.two_stars = o.optInt("two_stars");
-        this.one_star = o.optInt("one_star");
-        this.new_stars_per_attack = o.optInt("new_stars_per_attack");
-        this.average_destruction = o.optString("average_destruction");
-        this.average_duration = o.optInt("average_duration");
+        this.result = o.optJSONObject("stats").optString("result");
+        this.maxstars = o.optJSONObject("stats").optInt("maxtars");
+        this.heroic_defense = o.optJSONObject("stats").optString("heroic_defense");
+        this.heroic_attack = o.optJSONObject("stats").optString("heroic_attack");
+        this.attacks_used = o.optJSONObject("stats").optInt("attacks_used");
+        this.attacks_won = o.optJSONObject("stats").optInt("attacks_won");
+        this.attacks_lost = o.optJSONObject("stats").optInt("attacks_lost");
+        this.attacks_remaining = o.optJSONObject("stats").optInt("attacks_remaining");
+        this.three_stars = o.optJSONObject("stats").optInt("three_stars");
+        this.two_stars = o.optJSONObject("stats").optInt("two_stars");
+        this.one_star = o.optJSONObject("stats").optInt("one_star");
+        this.new_stars_per_attack = o.optJSONObject("stats").optInt("new_stars_per_attack");
+        this.average_destruction = o.optJSONObject("stats").optString("average_destruction");
+        this.average_duration = o.optJSONObject("stats").optInt("average_duration");
     }
 
     public int getWar() {

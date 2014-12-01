@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical" >
+
+<TextView
+    android:textSize="18sp"
+    android:padding="10dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2b2b2b"
+    android:id="@+id/txtAgainstWarStats"
+    android:text="Inception vs Clan"
+    android:textColor="#e2e2e2"/>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
-        <!--android:background="@drawable/selector_war_stats"-->
-
-        <TextView
-            android:textSize="18sp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#1b1b1b"
-            android:id="@+id/txtAgainstWarStats"
-            android:text="Inception vs Clan"
-            android:textColor="#e2e2e2"/>
+        android:background="@drawable/selector_war_stats">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -259,12 +267,15 @@
 
         </LinearLayout>
 
-        <FrameLayout
-            android:padding="10dp"
+        <TextView
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#3b3b3b"/>
-
+            android:layout_height="wrap_content"
+            android:background="#7b7b7b"
+            android:text="Estrellas"
+            android:textColor="#e2e2e2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -272,6 +283,27 @@
             android:orientation="horizontal">
 
             <TextView
+                android:gravity="center"
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="★"/>
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="★★"/>
+
+            <TextView
+                android:gravity="center"
                 android:textColor="#000"
                 android:layout_weight="0.4"
                 android:padding="10dp"
@@ -280,7 +312,37 @@
                 android:background="#e2e2e2"
                 android:text="★★★"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
+                android:gravity="center"
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtOnestarWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="9"/>
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtTwoStarsWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="3"/>
+
+            <TextView
+                android:gravity="center"
                 android:textColor="#3b3b3b"
                 android:id="@+id/txtThreeStarsWarStats"
                 android:layout_weight="0.6"
@@ -299,24 +361,34 @@
 
             <TextView
                 android:textColor="#000"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#e2e2e2"
-                android:text="★★"/>
+                android:text="Promedio"/>
 
             <TextView
                 android:textColor="#3b3b3b"
-                android:id="@+id/txtTwoStarsWarStats"
+                android:id="@+id/txtStarsPerAttackWarStats"
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#e2e2e2"
-                android:text="3"/>
+                android:text="1.50"/>
 
         </LinearLayout>
+
+        <TextView
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7b7b7b"
+            android:text="Destrucción"
+            android:textColor="#e2e2e2"/>
 
 
         <LinearLayout
@@ -331,19 +403,46 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#e2e2e2"
-                android:text="★"/>
+                android:text="Porcentaje"/>
 
             <TextView
                 android:textColor="#3b3b3b"
-                android:id="@+id/txtOnestarWarStats"
+                android:id="@+id/txtAverageDestructionWarStats"
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#e2e2e2"
-                android:text="9"/>
+                android:text="95%"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_weight="0.4"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="Tiempo"/>
+
+            <TextView
+                android:textColor="#3b3b3b"
+                android:id="@+id/txtAverageDurationWarStats"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#e2e2e2"
+                android:text="1m 35s"/>
 
         </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
+</LinearLayout>

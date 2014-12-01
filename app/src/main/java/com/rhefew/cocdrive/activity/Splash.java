@@ -107,12 +107,6 @@ public class Splash extends Activity {
                     JSONObject o = parser.getJSON("http://coc.rhefew.com/");
                     info = new WarInfo(o);
 
-                    LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
-                    if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
-
-                    }else{
-                        createStatsView();
-                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -125,65 +119,70 @@ public class Splash extends Activity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
+                initCountDown();
+                if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
+
+                    initPieChart();
+
+                    float count = 0;
+
+                    float agree = 0;
+                    float disagree = 0;
+                    if(info != null) {
+                        for (int i = 0; i < info.getCount(); i++) {
+                            int votevalue = info.getVotations().optInt(i);
+                            count++;
+                            if(votevalue>0) {
+                                if (votevalue == 2) {
+                                    agree++;
+                                } else {
+                                    disagree++;
+                                }
+                            }
+                        }
+
+                        float porcentaje = (agree / count * 100);
+
+                        setData(agree,disagree,(count-agree-disagree), 100);
+
+                        // add a selection listener
+                        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                            @Override
+                            public void onValueSelected(Entry e, int dataSetIndex) {
+                                Cons.results = info;
+                                Cons.value = e.getXIndex();
+                                startActivity(new Intent(Splash.this, Results.class));
+                            }
+
+                            @Override
+                            public void onNothingSelected() {
+
+                            }
+                        });
+
+                        if (porcentaje >= 70) {
+
+                            if(info.getStatus_code() == 1)
+                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus() + " - %" + porcentaje);
+                            else
+                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
+
+                            if(info.getStatus_code() > 1){
+                                TextView txtAgainst = (TextView)findViewById(R.id.txtAgainst);
+                                txtAgainst.setVisibility(View.VISIBLE);
+                                txtAgainst.setText("Contra: " + info.getAgainst());
+                            }
+                        }
+
+                    }else{
+                        Print.dialog(Splash.this, "No se realizaron votaciones");
+                    }
+                }else{
+                    createStatsView();
+                }
 
                 actionBar.setTitle(info.getStatus());
 
-                initCountDown();
-                initPieChart();
-
-                float count = 0;
-
-                float agree = 0;
-                float disagree = 0;
-                if(info != null) {
-                    for (int i = 0; i < info.getCount(); i++) {
-                        int votevalue = info.getVotations().optInt(i);
-                        count++;
-                        if(votevalue>0) {
-                            if (votevalue == 2) {
-                                agree++;
-                            } else {
-                                disagree++;
-                            }
-                        }
-                    }
-
-                    float porcentaje = (agree / count * 100);
-
-                    setData(agree,disagree,(count-agree-disagree), 100);
-
-                    // add a selection listener
-                    mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-                        @Override
-                        public void onValueSelected(Entry e, int dataSetIndex) {
-                            Cons.results = info;
-                            Cons.value = e.getXIndex();
-                            startActivity(new Intent(Splash.this, Results.class));
-                        }
-
-                        @Override
-                        public void onNothingSelected() {
-
-                        }
-                    });
-
-                    if (porcentaje >= 70) {
-
-                        if(info.getStatus_code() == 1)
-                            ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus() + " - %" + porcentaje);
-                        else
-                            ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
-
-                        if(info.getStatus_code() > 1){
-                            TextView txtAgainst = (TextView)findViewById(R.id.txtAgainst);
-                            txtAgainst.setVisibility(View.VISIBLE);
-                            txtAgainst.setText("Contra: " + info.getAgainst());
-                        }
-                    }
-
-                }else{
-                    Print.dialog(Splash.this, "No se realizaron votaciones");
-                }
             }
         }.execute();
     }
@@ -214,10 +213,10 @@ public class Splash extends Activity {
             protected void onPostExecute(Void aVoid) {
                 LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
                 llMasterDetails.removeAllViews();
-                llMasterDetails.addView(new WarStatsView(stats));
+                llMasterDetails.addView(new WarStatsView(Splash.this, stats));
                 super.onPostExecute(aVoid);
             }
-        };
+        }.execute();
     }
 
     private void initPieChart() {
