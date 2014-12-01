@@ -131,7 +131,6 @@ public class Splash extends Activity {
                             Cons.results = info;
                             Cons.value = e.getXIndex();
                             startActivity(new Intent(Splash.this, Results.class));
-
                         }
 
                         @Override
@@ -139,17 +138,21 @@ public class Splash extends Activity {
 
                         }
                     });
-                    if (porcentaje >= 60) {
 
-                        ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
+                    if (porcentaje >= 70) {
+
+                        if(info.getStatus_code() == 1)
+                            ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus() + " - %" + porcentaje);
+                        else
+                            ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
+
                         if(info.getStatus_code() > 1){
                             TextView txtAgainst = (TextView)findViewById(R.id.txtAgainst);
                             txtAgainst.setVisibility(View.VISIBLE);
-                            txtAgainst.setText("Enemigo: " + info.getAgainst());
+                            txtAgainst.setText("Contra: " + info.getAgainst());
                         }
-
-
                     }
+
                 }else{
                     Print.dialog(Splash.this, "No se realizaron votaciones");
                 }

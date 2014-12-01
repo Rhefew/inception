@@ -22,12 +22,23 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/chart"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/txtAgainst"
+        android:layout_above="@+id/linearLayout"
+        android:layout_margin="10dp"
+        android:visibility="invisible"
+        android:id="@+id/llMasterDetails">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
