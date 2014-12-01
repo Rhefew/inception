@@ -1,6 +1,7 @@
 package com.rhefew.cocdrive.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +67,8 @@ public class Splash extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        final ActionBar actionBar = getActionBar();
+
         context = this;
         if (checkPlayServices())
         {
@@ -92,8 +96,18 @@ public class Splash extends Activity {
                 try {
                     JSONObject o = parser.getJSON("http://coc.rhefew.com/");
                     info = new WarInfo(o);
-                } catch (Exception e) {
+                    assert actionBar != null;
+                    actionBar.setTitle(info.getStatus());
 
+                    LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
+                    if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
+
+                    }else{
+                        createStatsView();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 return null;
@@ -160,6 +174,10 @@ public class Splash extends Activity {
         }.execute();
 
         Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
+
+    }
+
+    private void createStatsView() {
 
     }
 
@@ -309,7 +327,7 @@ public class Splash extends Activity {
 
     public void openStats(View view){
         Cons.results = info;
-        startActivity(new Intent(Splash.this, MemberStats.class));
+        startActivity(new Intent(Splash.this, Rank.class));
     }
 
     private boolean checkPlayServices() {

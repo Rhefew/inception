@@ -14,8 +14,9 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/inception"
+
         android:label="Inception"
-        android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" >
+        android:theme="@android:style/Theme.Holo" >
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -30,7 +31,8 @@
 
         </receiver>
 
-        <activity android:name=".activity.NewUser">
+        <activity android:name=".activity.NewUser"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,9 +41,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.Splash" />
-        <activity android:name=".activity.Results"/>
-        <activity android:name=".activity.MemberStats"/>
+        <activity android:name=".activity.Splash"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Results"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Rank"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

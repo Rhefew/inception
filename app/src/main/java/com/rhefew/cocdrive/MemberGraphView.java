@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by rodrigo on 26/11/14.
  */
-public class MemberStatsView extends LinearLayout {
+public class MemberGraphView extends LinearLayout {
 
     String member;
     int stars_0;
@@ -29,7 +29,7 @@ public class MemberStatsView extends LinearLayout {
     int stars_3;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public MemberStatsView(Context context, String member, int stars_0, int stars_1, int stars_2, int stars_3, boolean is_memory_low) {
+    public MemberGraphView(Context context, String member, int stars_0, int stars_1, int stars_2, int stars_3, boolean is_memory_low) {
         super(context);
 
         this.member = member;

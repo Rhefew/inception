@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/llRankItem"
+    android:background="@drawable/selector_rank"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_weight="0.15"
+        android:layout_width="32dp"
+        android:layout_height="32dp">
+
+        <TextView
+            android:id="@+id/txtNumberRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2."
+            android:textColor="#1b1b1b"
+            android:textStyle="bold|italic"
+            android:textSize="18sp"
+            android:shadowColor="#1b1b1b"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/imgMedalRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtUserRank"
+        android:gravity="center|left"
+        android:layout_weight="0.8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="Jinora"
+        android:textColor="#1b1b1b"
+        android:textSize="18sp"
+        android:shadowColor="#1b1b1b"
+        android:editable="false" />
+
+
+    <RelativeLayout
+        android:layout_width="32dp"
+        android:layout_height="32dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/star"/>
+
+        <TextView
+            android:id="@+id/txtStarsRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:textColor="#1b1b1b"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
