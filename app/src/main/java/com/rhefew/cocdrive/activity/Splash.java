@@ -56,7 +56,6 @@ public class Splash extends Activity {
     Bundle savedInstanceState;
     ActionBar actionBar;
 
-
     /*GCM*/
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String EXTRA_MESSAGE = "message";
@@ -182,40 +181,11 @@ public class Splash extends Activity {
                         Print.dialog(Splash.this, "No se realizaron votaciones");
                     }
 
-                    Date votation = new Date(info.getVotation_date());
-                    Date current = Calendar.getInstance().getTime();
-                    long diffInMillisec;
-
-                    diffInMillisec = votation.getTime() - current.getTime();
-                    long sec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
-                    long min = TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
-                    long hs = TimeUnit.MILLISECONDS.toHours(diffInMillisec);
-
-                    long millisToGo = sec*1000+min*1000*60+hs*1000*60*60;
-
-                    new CountDownTimer(millisToGo,1000){
-
-                        @Override
-                        public void onTick(long millis) {
-                            int seconds = (int) (millis / 1000) % 60 ;
-                            int minutes = (int) ((millis / (1000*60)) % 60);
-                            int hours   = (int) ((millis / (1000*60*60)) % 24);
-                            String text = String.format("%02d:%02d:%02d",hours,minutes,seconds);
-                            ((TextView)findViewById(R.id.txtMensaje)).setText(text);
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            ((TextView)findViewById(R.id.txtMensaje)).setText("La votación iniciará pronto");
-                        }
-                    }.start();
+                    actionBar.setTitle(info.getStatus());
 
                 }else{
                     createStatsView();
                 }
-
-                actionBar.setTitle(info.getStatus());
-
             }
         }.execute();
     }
@@ -298,7 +268,28 @@ public class Splash extends Activity {
 
     private void initCountDown() {
 
-        ((TextView)findViewById(R.id.txtTimer)).setText("Votación abierta hasta las 22:00");
+        Date votation = new Date(info.getVotation_date());
+        Date current = new Date(info.getCurrent_date());
+        long diffInMillisec;
+
+        diffInMillisec = votation.getTime() - current.getTime();
+
+        new CountDownTimer(diffInMillisec,1000){
+
+            @Override
+            public void onTick(long millis) {
+                int seconds = (int) (millis / 1000) % 60 ;
+                int minutes = (int) ((millis / (1000*60)) % 60);
+                int hours   = (int) ((millis / (1000*60*60)) % 24);
+                String text = String.format("%02d:%02d:%02d",hours,minutes,seconds);
+                ((TextView)findViewById(R.id.txtTimer)).setText(text);
+            }
+
+            @Override
+            public void onFinish() {
+                ((TextView)findViewById(R.id.txtTimer)).setText("La votación iniciará pronto");
+            }
+        }.start();
     }
 
     public void createWar(){

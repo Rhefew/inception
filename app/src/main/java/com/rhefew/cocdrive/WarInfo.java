@@ -7,6 +7,7 @@ import org.json.JSONObject;
  * Created by rodrigo on 24/11/14.
  */
 public class WarInfo {
+    private String current_date;
     private String votation_date;
     private int count;
     private int war;
@@ -26,6 +27,7 @@ public class WarInfo {
     private JSONObject member_stars;
 
     public WarInfo(JSONObject o) {
+        this.current_date = o.optString("current_date");
         this.votation_date = o.optString("votation_date");
         this.war = o.optInt("war");
         this.status_code = o.optJSONObject("status").optInt("code");
@@ -143,6 +145,14 @@ public class WarInfo {
 
     public void setVotation_date(String votation_date) {
         this.votation_date = votation_date;
+    }
+
+    public String getCurrent_date() {
+        return current_date;
+    }
+
+    public void setCurrent_date(String current_date) {
+        this.current_date = current_date;
     }
 }
 
