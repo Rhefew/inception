@@ -7,6 +7,7 @@ import org.json.JSONObject;
  * Created by rodrigo on 24/11/14.
  */
 public class WarInfo {
+    private String votation_date;
     private int count;
     private int war;
     private int maxstars;
@@ -25,6 +26,7 @@ public class WarInfo {
     private JSONObject member_stars;
 
     public WarInfo(JSONObject o) {
+        this.votation_date = o.optString("votation_date");
         this.war = o.optInt("war");
         this.status_code = o.optJSONObject("status").optInt("code");
         this.status = o.optJSONObject("status").optString("description");
@@ -133,6 +135,14 @@ public class WarInfo {
 
     public void setMember_stars(JSONObject member_stars) {
         this.member_stars = member_stars;
+    }
+
+    public String getVotation_date() {
+        return votation_date;
+    }
+
+    public void setVotation_date(String votation_date) {
+        this.votation_date = votation_date;
     }
 }
 

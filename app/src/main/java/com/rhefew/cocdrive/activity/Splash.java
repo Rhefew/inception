@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class Splash extends Activity {
@@ -177,6 +181,35 @@ public class Splash extends Activity {
                     }else{
                         Print.dialog(Splash.this, "No se realizaron votaciones");
                     }
+
+                    Date votation = new Date(info.getVotation_date());
+                    Date current = Calendar.getInstance().getTime();
+                    long diffInMillisec;
+
+                    diffInMillisec = votation.getTime() - current.getTime();
+                    long sec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
+                    long min = TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
+                    long hs = TimeUnit.MILLISECONDS.toHours(diffInMillisec);
+
+                    long millisToGo = sec*1000+min*1000*60+hs*1000*60*60;
+
+                    new CountDownTimer(millisToGo,1000){
+
+                        @Override
+                        public void onTick(long millis) {
+                            int seconds = (int) (millis / 1000) % 60 ;
+                            int minutes = (int) ((millis / (1000*60)) % 60);
+                            int hours   = (int) ((millis / (1000*60*60)) % 24);
+                            String text = String.format("%02d:%02d:%02d",hours,minutes,seconds);
+                            ((TextView)findViewById(R.id.txtMensaje)).setText(text);
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            ((TextView)findViewById(R.id.txtMensaje)).setText("La votación iniciará pronto");
+                        }
+                    }.start();
+
                 }else{
                     createStatsView();
                 }
@@ -437,7 +470,7 @@ public class Splash extends Activity {
                     Log.d(TAG, "########################################");
                     Log.d(TAG, "Current Device's Registration ID is: "+regid);
                     Log.d(TAG, "########################################");
-                    
+
                     sendRegID();
                 }
                 catch (IOException ex)
