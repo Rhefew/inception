@@ -499,4 +499,8 @@ public class Splash extends Activity {
         super.onResume();
         checkPlayServices();
     }
+
+    public void openAdminPanel(View view){
+        startActivity(new Intent(Splash.this, AdminPanel.class));
+    }
 }

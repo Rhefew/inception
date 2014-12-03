@@ -52,6 +52,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.Rank"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AdminPanel"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
