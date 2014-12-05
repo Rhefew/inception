@@ -96,9 +96,7 @@ public class Splash extends Activity {
 
         loadWarInfo();
         Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
-
     }
-
     private void loadWarInfo() {
 
         new AsyncTask<Void, Void, Void>(){
@@ -122,7 +120,11 @@ public class Splash extends Activity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
-                initCountDown();
+                if(info.getStatus_code() == 1){
+                    initCountDown();
+                    displayVotationControls();
+                }
+
                 if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
 
                     initPieChart();
@@ -163,17 +165,15 @@ public class Splash extends Activity {
                             }
                         });
 
-                        if (porcentaje >= 70) {
+                        if (porcentaje >= 60) {
 
-                            if(info.getStatus_code() == 1)
+                            if(info.getStatus_code() == 1) {
                                 ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus() + " - %" + porcentaje);
-                            else
-                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
+                            }else if(info.getStatus_code()==3){
+                                actionBar.setTitle(info.getStatus());
+                            }else{
 
-                            if(info.getStatus_code() > 1){
-                                TextView txtAgainst = (TextView)findViewById(R.id.txtAgainst);
-                                txtAgainst.setVisibility(View.VISIBLE);
-                                txtAgainst.setText("Contra: " + info.getAgainst());
+                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
                             }
                         }
 
@@ -181,13 +181,16 @@ public class Splash extends Activity {
                         Print.dialog(Splash.this, "No se realizaron votaciones");
                     }
 
-                    actionBar.setTitle(info.getStatus());
 
                 }else{
                     createStatsView();
                 }
             }
         }.execute();
+    }
+
+    private void displayVotationControls() {
+        findViewById(R.id.llVotationControls).setVisibility(View.VISIBLE);
     }
 
     private void createStatsView() {
@@ -293,6 +296,7 @@ public class Splash extends Activity {
     }
 
     public void createWar(){
+//        insert into wars values ( (select max(war) + 1 from wars), 1)
 //        insert into votation (select (select MAX(WAR) from wars) as war, member, 0, '' from members)
     }
 
@@ -501,6 +505,7 @@ public class Splash extends Activity {
     }
 
     public void openAdminPanel(View view){
-        startActivity(new Intent(Splash.this, AdminPanel.class));
+        if(Cons.member.toLowerCase().equals("rhefew"))
+            startActivity(new Intent(Splash.this, AdminPanel.class));
     }
 }

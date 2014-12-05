@@ -16,20 +16,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="No hay quorum"
+        android:text="Cargando..."
         android:layout_gravity="center"
         android:layout_below="@+id/txtTimer"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="openAdminPanel"
+        android:clickable="true" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/txtAgainst"
-        android:layout_above="@+id/linearLayout"
-        android:layout_margin="10dp"
-        android:id="@+id/llMasterDetails">
+        android:layout_above="@+id/llVotationControls"
+        android:padding="10dp"
+        android:id="@+id/llMasterDetails"
+        android:layout_below="@+id/imgRank">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
@@ -54,7 +56,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="03:02:19"
         android:id="@+id/txtTimer"
         android:textSize="10sp"
         android:layout_centerHorizontal="true"
@@ -68,7 +69,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout">
+        android:id="@+id/llVotationControls"
+        android:visibility="gone">
 
         <EditText
             android:layout_width="match_parent"
@@ -110,19 +112,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtAgainst"
-        android:padding="4dp"
-        android:textColor="#892929"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Enemigo: "
-        android:layout_gravity="center"
-        android:layout_below="@+id/txtMensaje"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,19 +122,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:padding="10dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/inception"
-        android:onClick="openAdminPanel"
-        android:padding="10dp"
-        android:layout_toStartOf="@+id/txtAgainst"
-        android:layout_below="@+id/imgRank"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/imgRank"
-        android:layout_alignEnd="@+id/imgRank" />
 
 </RelativeLayout>

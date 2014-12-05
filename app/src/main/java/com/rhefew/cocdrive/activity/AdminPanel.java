@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rhefew.cocdrive.Async;
 import com.rhefew.cocdrive.JSONParser;
@@ -21,7 +22,10 @@ import java.io.IOException;
 /**
  * Created by rodrigo on 02/12/14.
  */
+
+
 public class AdminPanel extends Activity {
+
     @Override
     public void onCreate(Bundle savedInstanceState){
 
@@ -32,7 +36,7 @@ public class AdminPanel extends Activity {
         btnExecQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                execSQL(((EditText)findViewById(R.id.editQuery)).getText().toString());
+                execSQL(((EditText) findViewById(R.id.editQuery)).getText().toString());
             }
         });
 
@@ -41,39 +45,22 @@ public class AdminPanel extends Activity {
     public void execSQL(final String query){
         new AsyncTask<Void, Void, Void>(){
 
+            JSONObject jsonObject;
             @Override
             protected Void doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    JSONObject jsonObject = parser.getJSON("http://coc.rhefew.com/admin_query?sql=" + query);
-                    Print.dialog(AdminPanel.this, jsonObject.getString("result"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    jsonObject = parser.getJSON("http://coc.rhefew.com/admin_query?sql=" + query);
+                } catch (Exception e) {
+
                 }
-
                 return null;
-            }
-
-            ProgressDialog dialog;
-
-            @Override
-            protected void onPreExecute() {
-                dialog  = new ProgressDialog(AdminPanel.this);
-                dialog.setTitle("Admin - Ejecutar Query");
-                dialog.setMessage("Ejecutando sentencia SQL...");
-                dialog.setIndeterminate(true);
-                dialog.setCancelable(false);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                super.onPreExecute();
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                dialog.dismiss();
                 super.onPostExecute(aVoid);
+                Toast.makeText(AdminPanel.this, jsonObject.optString("result"), Toast.LENGTH_LONG);
             }
         }.execute();
     }
