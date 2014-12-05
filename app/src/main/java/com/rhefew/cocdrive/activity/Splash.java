@@ -183,6 +183,7 @@ public class Splash extends Activity {
 
 
                 }else{
+                    ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
                     createStatsView();
                 }
             }

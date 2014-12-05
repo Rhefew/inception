@@ -23,12 +23,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/selector_war_stats">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Máximo Estrellas"/>
 
@@ -46,7 +46,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="45"/>
 
@@ -55,7 +55,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Resultado"/>
 
@@ -73,7 +73,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="45 - 45"/>
 
@@ -86,7 +86,7 @@
             android:padding="6dp"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#3b3b3b"
             android:text="Estadísticas"
             android:textColor="#e2e2e2"/>
@@ -96,14 +96,14 @@
             android:padding="5dp"
             android:gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#7b7b7b"
             android:text="Héroes"
             android:textColor="#e2e2e2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="En ataque"/>
 
@@ -121,7 +121,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Mejor ataque"/>
 
@@ -131,7 +131,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="En defensa"/>
 
@@ -149,7 +149,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Mejor defensa"/>
 
@@ -160,7 +160,7 @@
             android:padding="5dp"
             android:gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#7b7b7b"
             android:text="Ataques"
             android:textColor="#e2e2e2"/>
@@ -168,7 +168,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -176,7 +176,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Usados"/>
 
@@ -186,14 +186,14 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="30"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -201,7 +201,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Ganados"/>
 
@@ -211,14 +211,14 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="15"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -226,7 +226,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Perdidos"/>
 
@@ -236,14 +236,14 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="5"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -251,7 +251,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Restantes"/>
 
@@ -261,7 +261,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="10"/>
 
@@ -272,14 +272,14 @@
             android:padding="5dp"
             android:gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#7b7b7b"
             android:text="Estrellas"
             android:textColor="#e2e2e2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -288,7 +288,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="★"/>
 
@@ -298,7 +298,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="★★"/>
 
@@ -308,7 +308,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="★★★"/>
 
@@ -316,7 +316,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -326,7 +326,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="9"/>
 
@@ -337,7 +337,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="3"/>
 
@@ -348,7 +348,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="9"/>
 
@@ -356,7 +356,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -364,7 +364,7 @@
                 android:layout_weight="0.5"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Promedio"/>
 
@@ -374,7 +374,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="1.50"/>
 
@@ -385,7 +385,7 @@
             android:padding="5dp"
             android:gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#7b7b7b"
             android:text="Destrucción"
             android:textColor="#e2e2e2"/>
@@ -393,7 +393,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -401,7 +401,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Porcentaje"/>
 
@@ -411,7 +411,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="95%"/>
 
@@ -419,7 +419,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -427,7 +427,7 @@
                 android:layout_weight="0.4"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="Tiempo"/>
 
@@ -437,7 +437,7 @@
                 android:layout_weight="0.6"
                 android:padding="10dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#e2e2e2"
                 android:text="1m 35s"/>
 

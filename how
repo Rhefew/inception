@@ -1,0 +1,451 @@
+[1mdiff --git a/app/app-release.apk b/app/app-release.apk[m
+[1mindex 57daffa..4c6a4c1 100644[m
+Binary files a/app/app-release.apk and b/app/app-release.apk differ
+[1mdiff --git a/app/build.gradle b/app/build.gradle[m
+[1mindex 96d82fa..d85a2cd 100644[m
+[1m--- a/app/build.gradle[m
+[1m+++ b/app/build.gradle[m
+[36m@@ -14,7 +14,7 @@[m [mandroid {[m
+         applicationId "com.rhefew.cocdrive"[m
+         minSdkVersion 14[m
+         targetSdkVersion 20[m
+[31m-        versionCode 3[m
+[32m+[m[32m        versionCode 4[m
+         versionName "1.0.1"[m
+     }[m
+     buildTypes {[m
+[1mdiff --git a/app/inception.apk b/app/inception.apk[m
+[1mdeleted file mode 100644[m
+[1mindex f07de54..0000000[m
+Binary files a/app/inception.apk and /dev/null differ
+[1mdiff --git a/app/src/main/java/com/rhefew/cocdrive/activity/Splash.java b/app/src/main/java/com/rhefew/cocdrive/activity/Splash.java[m
+[1mindex 2333e33..5020f4c 100644[m
+[1m--- a/app/src/main/java/com/rhefew/cocdrive/activity/Splash.java[m
+[1m+++ b/app/src/main/java/com/rhefew/cocdrive/activity/Splash.java[m
+[36m@@ -183,6 +183,7 @@[m [mpublic class Splash extends Activity {[m
+ [m
+ [m
+                 }else{[m
+[32m+[m[32m                    ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());[m
+                     createStatsView();[m
+                 }[m
+             }[m
+[1mdiff --git a/app/src/main/res/layout/war_stats_view.xml b/app/src/main/res/layout/war_stats_view.xml[m
+[1mindex b2bc622..bf3eb6c 100644[m
+[1m--- a/app/src/main/res/layout/war_stats_view.xml[m
+[1m+++ b/app/src/main/res/layout/war_stats_view.xml[m
+[36m@@ -23,12 +23,12 @@[m
+     <LinearLayout[m
+         android:orientation="vertical"[m
+         android:layout_width="match_parent"[m
+[31m-        android:layout_height="wrap_content"[m
+[32m+[m[32m        android:layout_height="match_parent"[m
+         android:background="@drawable/selector_war_stats">[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -36,7 +36,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Máximo Estrellas"/>[m
+ [m
+[36m@@ -46,7 +46,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="45"/>[m
+ [m
+[36m@@ -55,7 +55,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -63,7 +63,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Resultado"/>[m
+ [m
+[36m@@ -73,7 +73,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="45 - 45"/>[m
+ [m
+[36m@@ -86,7 +86,7 @@[m
+             android:padding="6dp"[m
+             android:gravity="center"[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:background="#3b3b3b"[m
+             android:text="Estadísticas"[m
+             android:textColor="#e2e2e2"/>[m
+[36m@@ -96,14 +96,14 @@[m
+             android:padding="5dp"[m
+             android:gravity="left"[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:background="#7b7b7b"[m
+             android:text="Héroes"[m
+             android:textColor="#e2e2e2"/>[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -111,7 +111,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="En ataque"/>[m
+ [m
+[36m@@ -121,7 +121,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Mejor ataque"/>[m
+ [m
+[36m@@ -131,7 +131,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -139,7 +139,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="En defensa"/>[m
+ [m
+[36m@@ -149,7 +149,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Mejor defensa"/>[m
+ [m
+[36m@@ -160,7 +160,7 @@[m
+             android:padding="5dp"[m
+             android:gravity="left"[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:background="#7b7b7b"[m
+             android:text="Ataques"[m
+             android:textColor="#e2e2e2"/>[m
+[36m@@ -168,7 +168,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -176,7 +176,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Usados"/>[m
+ [m
+[36m@@ -186,14 +186,14 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="30"/>[m
+ [m
+         </LinearLayout>[m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -201,7 +201,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Ganados"/>[m
+ [m
+[36m@@ -211,14 +211,14 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="15"/>[m
+ [m
+         </LinearLayout>[m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -226,7 +226,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Perdidos"/>[m
+ [m
+[36m@@ -236,14 +236,14 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="5"/>[m
+ [m
+         </LinearLayout>[m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -251,7 +251,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Restantes"/>[m
+ [m
+[36m@@ -261,7 +261,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="10"/>[m
+ [m
+[36m@@ -272,14 +272,14 @@[m
+             android:padding="5dp"[m
+             android:gravity="left"[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:background="#7b7b7b"[m
+             android:text="Estrellas"[m
+             android:textColor="#e2e2e2"/>[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -288,7 +288,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="★"/>[m
+ [m
+[36m@@ -298,7 +298,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="★★"/>[m
+ [m
+[36m@@ -308,7 +308,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="★★★"/>[m
+ [m
+[36m@@ -316,7 +316,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -326,7 +326,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="9"/>[m
+ [m
+[36m@@ -337,7 +337,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="3"/>[m
+ [m
+[36m@@ -348,7 +348,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="9"/>[m
+ [m
+[36m@@ -356,7 +356,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -364,7 +364,7 @@[m
+                 android:layout_weight="0.5"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Promedio"/>[m
+ [m
+[36m@@ -374,7 +374,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="1.50"/>[m
+ [m
+[36m@@ -385,7 +385,7 @@[m
+             android:padding="5dp"[m
+             android:gravity="left"[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:background="#7b7b7b"[m
+             android:text="Destrucción"[m
+             android:textColor="#e2e2e2"/>[m
+[36m@@ -393,7 +393,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -401,7 +401,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Porcentaje"/>[m
+ [m
+[36m@@ -411,7 +411,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="95%"/>[m
+ [m
+[36m@@ -419,7 +419,7 @@[m
+ [m
+         <LinearLayout[m
+             android:layout_width="match_parent"[m
+[31m-            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_height="match_parent"[m
+             android:orientation="horizontal">[m
+ [m
+             <TextView[m
+[36m@@ -427,7 +427,7 @@[m
+                 android:layout_weight="0.4"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="Tiempo"/>[m
+ [m
+[36m@@ -437,7 +437,7 @@[m
+                 android:layout_weight="0.6"[m
+                 android:padding="10dp"[m
+                 android:layout_width="0dp"[m
+[31m-                android:layout_height="wrap_content"[m
+[32m+[m[32m                android:layout_height="match_parent"[m
+                 android:background="#e2e2e2"[m
+                 android:text="1m 35s"/>[m
+ [m
