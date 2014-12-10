@@ -3,18 +3,15 @@ package com.rhefew.cocdrive.activity;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -31,28 +28,25 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.rhefew.cocdrive.ClanInfo;
 import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
 import com.rhefew.cocdrive.R;
-import com.rhefew.cocdrive.WarInfo;
 import com.rhefew.cocdrive.WarStats;
+import com.rhefew.cocdrive.WarStatsView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class Splash extends Activity {
 
     PieChart mChart;
-    WarInfo info;
+    ClanInfo info;
     Bundle savedInstanceState;
     ActionBar actionBar;
 
@@ -106,7 +100,7 @@ public class Splash extends Activity {
                 JSONParser parser = new JSONParser();
                 try {
                     JSONObject o = parser.getJSON("http://coc.rhefew.com/");
-                    info = new WarInfo(o);
+                    info = new ClanInfo(o);
 
 
                 } catch (Exception e) {

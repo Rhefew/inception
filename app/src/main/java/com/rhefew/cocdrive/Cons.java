@@ -5,7 +5,7 @@ package com.rhefew.cocdrive;
  */
 public class Cons {
 
-    public static WarInfo results;
+    public static ClanInfo results;
 
     public static int value;
     public static String member;
