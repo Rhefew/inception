@@ -480,7 +480,7 @@ public class Splash extends Activity {
 
                 try {
                     JSONParser parser = new JSONParser();
-                    parser.get("http://coc.rhefew.com/reg_id.php?id=" + regid);
+                    parser.get("http://coc.rhefew.com/reg_id.php?member=" + Cons.member + "&id=" + regid);
                 }catch(Exception e ){
                     Log.e(getApplicationContext().getPackageName(), e.getMessage());
                     e.printStackTrace();
