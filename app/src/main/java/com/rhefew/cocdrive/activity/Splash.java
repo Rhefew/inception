@@ -27,7 +27,12 @@ import com.github.mikephil.charting.interfaces.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.achievement.Achievements;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.plus.Plus;
+import com.google.example.games.basegameutils.BaseGameUtils;
 import com.rhefew.cocdrive.ClanInfo;
 import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
@@ -43,7 +48,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Splash extends Activity {
+public class Splash extends Activity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     PieChart mChart;
     ClanInfo info;
@@ -62,6 +68,14 @@ public class Splash extends Activity {
     private Context context= null;
     /*END GCM*/
 
+    /*Google Play Game Services*/
+    private GoogleApiClient mGoogleApiClient;
+    private static int RC_SIGN_IN = 9001;
+    private boolean mResolvingConnectionFailure = false;
+    boolean mAutoStartSignInflow = true;
+    private boolean mSignInClicked = false;
+    /*END*/
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +85,15 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
 
         actionBar = getActionBar();
+
+        // Create the Google Api Client with access to Plus and Games
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                        // add other APIs and scopes here as needed
+                .build();
 
         context = this;
         if (checkPlayServices())
@@ -91,6 +114,7 @@ public class Splash extends Activity {
         loadWarInfo();
         Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
     }
+
     private void loadWarInfo() {
 
         new AsyncTask<Void, Void, Void>(){
@@ -288,11 +312,6 @@ public class Splash extends Activity {
                 ((TextView)findViewById(R.id.txtTimer)).setText("La votación iniciará pronto");
             }
         }.start();
-    }
-
-    public void createWar(){
-//        insert into wars values ( (select max(war) + 1 from wars), 1)
-//        insert into votation (select (select MAX(WAR) from wars) as war, member, 0, '' from members)
     }
 
     private void setData(float pos, float neg, float neu, float range) {
@@ -503,4 +522,90 @@ public class Splash extends Activity {
         if(Cons.member.toLowerCase().equals("rhefew"))
             startActivity(new Intent(Splash.this, AdminPanel.class));
     }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_novato));
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+        // Attempt to reconnect
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        if (mResolvingConnectionFailure) {
+            // already resolving
+            return;
+        }
+
+        // if the sign-in button was clicked or if auto sign-in is enabled,
+        // launch the sign-in flow
+        if (mSignInClicked || mAutoStartSignInflow) {
+            mAutoStartSignInflow = false;
+            mSignInClicked = false;
+            mResolvingConnectionFailure = true;
+
+            // Attempt to resolve the connection failure using BaseGameUtils.
+            // The R.string.signin_other_error value should reference a generic
+            // error string in your strings.xml file, such as "There was
+            // an issue with sign-in, please try again later."
+            if (!BaseGameUtils.resolveConnectionFailure(this,
+                    mGoogleApiClient, connectionResult,
+                    RC_SIGN_IN, "Error al conectarse con google play services")) {
+                mResolvingConnectionFailure = false;
+            }
+        }
+
+        // Put code here to display the sign-in button
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent intent) {
+        if (requestCode == RC_SIGN_IN) {
+            mSignInClicked = false;
+            mResolvingConnectionFailure = false;
+            if (resultCode == RESULT_OK) {
+                mGoogleApiClient.connect();
+            } else {
+                // Bring up an error dialog to alert the user that sign-in
+                // failed. The R.string.signin_failure should reference an error
+                // string in your strings.xml file that tells the user they
+                // could not be signed in, such as "Unable to sign in."
+                BaseGameUtils.showActivityResultError(this, requestCode, resultCode, 0);
+            }
+        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    // Call when the sign-in button is clicked
+    public void signInClicked(View view) {
+        mSignInClicked = true;
+        mGoogleApiClient.connect();
+    }
+
+    // Call when the sign-out button is clicked
+    public void signOutclicked(View view) {
+        mSignInClicked = false;
+        Games.signOut(mGoogleApiClient);
+    }
+
 }
