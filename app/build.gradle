@@ -12,8 +12,19 @@ android {
         applicationId 'com.rhefew.cocdrive'
         minSdkVersion 14
         targetSdkVersion 21
+<<<<<<< HEAD
         versionCode 9
         versionName '1.0.5'
+=======
+<<<<<<< HEAD
+        versionCode 6
+        versionName '1.0.3'
+=======
+        versionCode 8
+        versionName '1.0.4'
+        signingConfig signingConfigs.config
+>>>>>>> 1d68c6adaa334c28d64e11711b0494f39cbc2cc7
+>>>>>>> 92a480e8ecbc003b805f8f4d37eb90ab6aaa776d
     }
     buildTypes {
         release {

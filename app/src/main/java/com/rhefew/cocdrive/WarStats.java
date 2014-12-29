@@ -19,7 +19,7 @@ public class WarStats {
     private int three_stars;
     private int two_stars;
     private int one_star;
-    private int new_stars_per_attack;
+    private double new_stars_per_attack;
     private String average_destruction;
     private int average_duration;
 
@@ -27,7 +27,7 @@ public class WarStats {
         this.war = o.optInt("war");
         this.against = o.optString("against");
         this.result = o.optJSONObject("stats").optString("result");
-        this.maxstars = o.optJSONObject("stats").optInt("maxtars");
+        this.maxstars = o.optJSONObject("stats").optInt("maxstars");
         this.heroic_defense = o.optJSONObject("stats").optString("heroic_defense");
         this.heroic_attack = o.optJSONObject("stats").optString("heroic_attack");
         this.attacks_used = o.optJSONObject("stats").optInt("attacks_used");
@@ -37,7 +37,7 @@ public class WarStats {
         this.three_stars = o.optJSONObject("stats").optInt("three_stars");
         this.two_stars = o.optJSONObject("stats").optInt("two_stars");
         this.one_star = o.optJSONObject("stats").optInt("one_star");
-        this.new_stars_per_attack = o.optJSONObject("stats").optInt("new_stars_per_attack");
+        this.new_stars_per_attack = o.optJSONObject("stats").optDouble("new_stars_per_attack");
         this.average_destruction = o.optJSONObject("stats").optString("average_destruction");
         this.average_duration = o.optJSONObject("stats").optInt("average_duration");
     }
@@ -146,7 +146,7 @@ public class WarStats {
         this.one_star = one_star;
     }
 
-    public int getNew_stars_per_attack() {
+    public double getNew_stars_per_attack() {
         return new_stars_per_attack;
     }
 
