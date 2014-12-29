@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <string name="app_id">215166380555</string>
+    <string name="achievement_votante_novato">CgkIi9Spx6EGEAIQAg</string>
+    <string name="achievement_votante_casual">CgkIi9Spx6EGEAIQAw</string>
+    <string name="achievement_votante_experto">CgkIi9Spx6EGEAIQBA</string>
+    <string name="achievement_bronceado">CgkIi9Spx6EGEAIQBQ</string>
+    <string name="achievement_plateado">CgkIi9Spx6EGEAIQBg</string>
+    <string name="achievement_dorado">CgkIi9Spx6EGEAIQBw</string>
+    <string name="achievement_literato">CgkIi9Spx6EGEAIQCA</string>
+    <string name="achievement_guerrero">CgkIi9Spx6EGEAIQCQ</string>
+    <string name="achievement_hroe">CgkIi9Spx6EGEAIQCg</string>
+    <string name="achievement_aguafiestas">CgkIi9Spx6EGEAIQCw</string>
+    <string name="achievement_pacifista">CgkIi9Spx6EGEAIQDA</string>
+</resources>
