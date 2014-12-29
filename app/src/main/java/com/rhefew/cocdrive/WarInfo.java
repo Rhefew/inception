@@ -154,6 +154,7 @@ public class WarInfo {
     public void setCurrent_date(String current_date) {
         this.current_date = current_date;
     }
+
 }
 
 

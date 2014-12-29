@@ -26,6 +26,9 @@ public class ClanInfo {
     /*Members global star stats*/
     private JSONObject member_stars;
 
+    /*achievements object*/
+    private JSONObject achievements_stats;
+
     public ClanInfo(JSONObject o) {
         this.current_date = o.optString("current_date");
         this.votation_date = o.optString("votation_date");
@@ -41,6 +44,7 @@ public class ClanInfo {
         this.heroic_attack = o.optString("heroic_attack");
         this.heroic_defense = o.optString("heroic_defense");
         this.member_stars = o.optJSONObject("member_stars");
+        this.achievements_stats = o.optJSONObject("achievements_stats");
     }
 
     public int getWar() {
@@ -153,6 +157,14 @@ public class ClanInfo {
 
     public void setCurrent_date(String current_date) {
         this.current_date = current_date;
+    }
+
+    public JSONObject getAchievements_stats() {
+        return achievements_stats;
+    }
+
+    public void setAchievements_stats(JSONObject achievements_stats) {
+        this.achievements_stats = achievements_stats;
     }
 }
 

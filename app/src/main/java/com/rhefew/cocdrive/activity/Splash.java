@@ -208,6 +208,30 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         }.execute();
     }
 
+    private void unlockVoteAchievements(int voteCount, int votePositive, int voteNegative) {
+        if(voteCount > 0){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_novato));
+        }
+        if(voteCount >=5){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_casual));
+        }
+        if(voteCount >=20){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_experto));
+        }
+        if(votePositive >=5){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_guerrero));
+        }
+        if(votePositive >=10){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_hroe));
+        }
+        if(voteNegative >=5){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_aguafiestas));
+        }
+        if(voteNegative >=10){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_pacifista));
+        }
+    }
+
     private void displayVotationControls() {
         findViewById(R.id.llVotationControls).setVisibility(View.VISIBLE);
     }
@@ -526,7 +550,6 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     @Override
     public void onConnected(Bundle bundle) {
 
-        Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_novato));
     }
 
     @Override
@@ -571,12 +594,24 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             mResolvingConnectionFailure = false;
             if (resultCode == RESULT_OK) {
                 mGoogleApiClient.connect();
+
+            /*unlocking achievements*/
+                JSONObject achievements_stats = info.getAchievements_stats().optJSONObject(Cons.member);
+                if(achievements_stats != null){
+                    int voteCount = achievements_stats.optInt("vote_count");
+                    int votePositive= achievements_stats.optInt("vote_positive_count");
+                    int voteNegative= achievements_stats.optInt("vote_negative_count");
+
+                    unlockVoteAchievements(voteCount, votePositive, voteNegative);
+                }
+
             } else {
                 // Bring up an error dialog to alert the user that sign-in
                 // failed. The R.string.signin_failure should reference an error
                 // string in your strings.xml file that tells the user they
                 // could not be signed in, such as "Unable to sign in."
                 BaseGameUtils.showActivityResultError(this, requestCode, resultCode, 0);
+
             }
         }
 
