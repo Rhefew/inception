@@ -159,16 +159,9 @@ public class Splash extends Activity {
                             }
                         });
 
-                        if (porcentaje >= 60) {
-
-                            if(info.getStatus_code() == 1) {
-                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus() + " - %" + porcentaje);
-                            }else if(info.getStatus_code()==3){
-                                actionBar.setTitle(info.getStatus());
-                            }else{
-
-                                ((TextView) findViewById(R.id.txtMensaje)).setText(info.getStatus());
-                            }
+                        TextView mensaje = ((TextView) findViewById(R.id.txtMensaje));
+                        if(info.getStatus_code() == 1){
+                            mensaje.setText(info.getStatus() + (porcentaje > 60 ? "\nSe inicia la guerra" : "\nNo hay quorum") );
                         }
 
                     }else{

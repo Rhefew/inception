@@ -52,7 +52,7 @@ public class WarStatsView extends LinearLayout {
         destruction.setText("%"+stats.getAverage_destruction());
         int mins = (stats.getAverage_duration() / 60);
         int secs = stats.getAverage_duration() - (60 * mins);
-        duration.setText(""+(stats.getAverage_duration() / 60) + " min " + (stats.getAverage_duration()));
+        duration.setText(""+ mins+ " min " + secs + " seg");
 
         this.addView(rootView);
     }
