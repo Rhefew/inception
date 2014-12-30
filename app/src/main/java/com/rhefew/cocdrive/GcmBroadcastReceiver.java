@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
 
-import com.rhefew.cocdrive.activity.NewUser;
+import com.rhefew.cocdrive.activity.Login;
 import com.rhefew.cocdrive.activity.Splash;
 
 /**
@@ -27,15 +27,9 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
 
-        /*retrieving registered user*/
-        SharedPreferences sp = context.getSharedPreferences("Inception", 0);
-        if(sp.getBoolean("registered", false)){
-            Cons.member = sp.getString("member", "");
-        }
-
         /*Notification*/
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, Splash.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, Login.class), 0);
 
         String msg = intent.getExtras().getString("message");
         String title = intent.getExtras().getString("title");

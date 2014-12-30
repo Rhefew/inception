@@ -36,7 +36,7 @@
 
         </receiver>
 
-        <activity android:name=".activity.NewUser"
+        <activity android:name=".activity.Login"
             android:screenOrientation="portrait">
 
             <intent-filter>

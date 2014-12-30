@@ -604,7 +604,6 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 // string in your strings.xml file that tells the user they
                 // could not be signed in, such as "Unable to sign in."
                 BaseGameUtils.showActivityResultError(this, requestCode, resultCode, 0);
-
             }
         }
 

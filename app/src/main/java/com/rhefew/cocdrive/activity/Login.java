@@ -19,7 +19,7 @@ import org.json.JSONObject;
 /**
  * Created by rodrigo on 23/11/14.
  */
-public class NewUser extends Activity {
+public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +39,8 @@ public class NewUser extends Activity {
 
         SharedPreferences sp = getSharedPreferences("Inception", 0);
         if(sp.getBoolean("registered", false)){
-            Cons.member = sp.getString("member", "");
-            startActivity(new Intent(NewUser.this, Splash.class));
-            finish();
+
+            ((EditText)findViewById(R.id.txtUserName)).setText(sp.getString("member", ""));
         }
     }
 
@@ -78,16 +77,16 @@ public class NewUser extends Activity {
                         editor.commit();
 
                         Cons.member = user;
-                        startActivity(new Intent(NewUser.this, Splash.class));
+                        startActivity(new Intent(Login.this, Splash.class));
 
                     }else{
-                        Print.dialog(NewUser.this, o.optString("result"));
+                        Print.dialog(Login.this, o.optString("result"));
                     }
                     super.onPostExecute(s);
                 }
             }.execute();
         }else{
-            Print.dialog(NewUser.this, "Las contraseñas no coinciden");
+            Print.dialog(Login.this, "Las contraseñas no coinciden");
         }
     }
 
@@ -124,10 +123,10 @@ public class NewUser extends Activity {
                     editor.commit();
 
                     Cons.member = user;
-                    startActivity(new Intent(NewUser.this, Splash.class));
+                    startActivity(new Intent(Login.this, Splash.class));
 
                 }else{
-                    Print.dialog(NewUser.this, o.optString("result"));
+                    Print.dialog(Login.this, o.optString("result"));
                 }
                 super.onPostExecute(s);
             }
