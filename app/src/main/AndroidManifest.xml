@@ -16,7 +16,7 @@
         android:icon="@drawable/inception"
 
         android:label="Inception"
-        android:theme="@android:style/Theme.Holo" >
+        android:theme="@android:style/Theme.Holo.Light" >
 
         <meta-data android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/app_id" />

@@ -21,6 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file('/home/rhefew/projects/inception/keystore.jks')
+            keyAlias 'rhefew'
+            keyPassword 'rodrijt92'
+            storePassword 'rodrijt92'
+        }
+    }
     productFlavors {
     }
 }

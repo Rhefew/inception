@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tropas cuartel"
+        android:gravity="center"
+        android:background="@color/material_blue_grey_800"
+        android:textColor="@color/background_material_light"
+        android:padding="10dp"/>
+
+
+    <LinearLayout
+        android:background="#FFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgBarbarian"
+            android:src="@drawable/barbarian"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgArcher"
+            android:src="@drawable/archer"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgGobling"
+            android:src="@drawable/goblin"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgGiant"
+            android:src="@drawable/giant"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgWallBreaker"
+            android:src="@drawable/wallbreaker"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgBalloon"
+            android:src="@drawable/balloon"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgWizard"
+            android:src="@drawable/wizard"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgHealer"
+            android:src="@drawable/healer"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgDragon"
+            android:src="@drawable/dragon"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgPekka"
+            android:src="@drawable/pekka"/>
+
+    </LinearLayout>
+
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tropas cuartel oscuro"
+        android:gravity="center"
+        android:background="@color/material_blue_grey_800"
+        android:textColor="@color/background_material_light"
+        android:padding="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgMinion"
+            android:src="@drawable/minion"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgHogRider"
+            android:src="@drawable/hogrider"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgValkiria"
+            android:src="@drawable/valkirie"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgGolem"
+            android:src="@drawable/golem"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgWitch"
+            android:src="@drawable/witch"/>
+
+        <ImageView
+            android:background="#FFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="64dp"
+            android:id="@+id/imgLavaHound"
+            android:src="@drawable/lavahound"/>
+
+    </LinearLayout>
+
+</LinearLayout>
