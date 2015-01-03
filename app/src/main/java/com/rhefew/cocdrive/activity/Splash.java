@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -48,6 +49,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 
 public class Splash extends Activity implements GoogleApiClient.ConnectionCallbacks,
@@ -65,9 +67,9 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static String TAG = "LaunchActivity";
     protected String SENDER_ID = "151603048070";
-    private GoogleCloudMessaging gcm =null;
+    private GoogleCloudMessaging gcm = null;
     private String regid = null;
-    private Context context= null;
+    private Context context = null;
     /*END GCM*/
 
     /*Google Play Game Services*/
@@ -98,17 +100,13 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 .build();
 
         context = this;
-        if (checkPlayServices())
-        {
+        if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if (regid.isEmpty())
-            {
+            if (regid.isEmpty()) {
                 registerInBackground();
-            }
-            else
-            {
+            } else {
                 Log.d(TAG, "No valid Google Play Services APK found.");
             }
         }
@@ -123,14 +121,16 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         loadWarInfo();
         Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
-        if(Cons.member.toLowerCase().equals("rhefew")){
+        if (Cons.member.toLowerCase().equals("rhefew")) {
             findViewById(R.id.imgAdmin).setVisibility(View.VISIBLE);
         }
+
+
     }
 
     private void loadWarInfo() {
 
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
@@ -151,14 +151,14 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
-                if(info.getStatus_code() == 1){
+                if (info.getStatus_code() == 1) {
                     initCountDown();
                     displayVotationControls();
                 }
 
                 actionBar.setTitle(info.getStatus());
 
-                if(info.getStatus_code() == 1 || info.getStatus_code() == 2){
+                if (info.getStatus_code() == 1 || info.getStatus_code() == 2) {
 
                     initPieChart();
 
@@ -166,11 +166,11 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
                     float agree = 0;
                     float disagree = 0;
-                    if(info != null) {
+                    if (info != null) {
                         for (int i = 0; i < info.getCount(); i++) {
                             int votevalue = info.getVotations().optInt(i);
                             count++;
-                            if(votevalue>0) {
+                            if (votevalue > 0) {
                                 if (votevalue == 2) {
                                     agree++;
                                 } else {
@@ -179,7 +179,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                             }
                         }
 
-                        setData(agree,disagree,(count-agree-disagree), 100);
+                        setData(agree, disagree, (count - agree - disagree), 100);
 
                         // add a selection listener
                         mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -196,12 +196,12 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                             }
                         });
 
-                    }else{
+                    } else {
                         Print.dialog(Splash.this, "No se realizaron votaciones");
                     }
 
 
-                }else{
+                } else {
                     actionBar.setTitle(info.getStatus());
                     createStatsView();
                 }
@@ -210,28 +210,28 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     }
 
     private void unlockVoteAchievements(int voteCount, int votePositive, int voteNegative) {
-        if(voteCount > 0){
+        if (voteCount > 0) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_novato));
         }
-        if(voteCount >=5){
+        if (voteCount >= 5) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_casual));
         }
-        if(voteCount >=20){
+        if (voteCount >= 20) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_experto));
         }
-        if(votePositive >=5){
+        if (votePositive >= 5) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_guerrero));
         }
-        if(votePositive >=10){
+        if (votePositive >= 10) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_hroe));
         }
-        if(voteNegative >=5){
+        if (voteNegative >= 5) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_aguafiestas));
         }
-        if(voteNegative >=10){
+        if (voteNegative >= 10) {
             Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_pacifista));
         }
-        Games.Leaderboards.loadCurrentPlayerLeaderboardScore(mGoogleApiClient, "Logros", 0,0);
+        Games.Leaderboards.loadCurrentPlayerLeaderboardScore(mGoogleApiClient, "Logros", 0, 0);
     }
 
     private void displayVotationControls() {
@@ -239,7 +239,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     }
 
     private void createStatsView() {
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
 
             WarStats stats;
 
@@ -250,7 +250,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                     JSONObject json = parser.getJSON("http://coc.rhefew.com/wars_info.php");
                     stats = new WarStats(json);
 
-                } catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -262,7 +262,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                LinearLayout llMasterDetails = (LinearLayout)findViewById(R.id.llMasterDetails);
+                LinearLayout llMasterDetails = (LinearLayout) findViewById(R.id.llMasterDetails);
                 llMasterDetails.removeAllViews();
                 llMasterDetails.addView(new WarStatsView(Splash.this, stats));
                 super.onPostExecute(aVoid);
@@ -322,20 +322,20 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         diffInMillisec = votation.getTime() - current.getTime();
 
-        new CountDownTimer(diffInMillisec,1000){
+        new CountDownTimer(diffInMillisec, 1000) {
 
             @Override
             public void onTick(long millis) {
-                int seconds = (int) (millis / 1000) % 60 ;
-                int minutes = (int) ((millis / (1000*60)) % 60);
-                int hours   = (int) ((millis / (1000*60*60)) % 24);
-                String text = String.format("%02d:%02d:%02d",hours,minutes,seconds);
-                ((TextView)findViewById(R.id.txtTimer)).setText(text);
+                int seconds = (int) (millis / 1000) % 60;
+                int minutes = (int) ((millis / (1000 * 60)) % 60);
+                int hours = (int) ((millis / (1000 * 60 * 60)) % 24);
+                String text = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                ((TextView) findViewById(R.id.txtTimer)).setText(text);
             }
 
             @Override
             public void onFinish() {
-                ((TextView)findViewById(R.id.txtTimer)).setText("La votación iniciará pronto");
+                ((TextView) findViewById(R.id.txtTimer)).setText("La votación iniciará pronto");
             }
         }.start();
     }
@@ -355,7 +355,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         ArrayList<String> xVals = new ArrayList<String>();
 
-        PieDataSet set1 = new PieDataSet(yVals1,"");
+        PieDataSet set1 = new PieDataSet(yVals1, "");
         set1.setSliceSpace(5f);
 
         // add a lot of colors
@@ -377,34 +377,35 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         mChart.invalidate();
     }
 
-    public void refresh(View view){
+    public void refresh(View view) {
         loadWarInfo();
     }
 
-    public void vote(View view){
+    public void vote(View view) {
 
-        EditText txtComment = (EditText)findViewById(R.id.txtCommentSplash);
+        EditText txtComment = (EditText) findViewById(R.id.txtCommentSplash);
         String comment = txtComment.getText().toString();
-        if(!txtComment.getText().toString().equals("")) {
-            if(comment.length() > 10) {
+        if (!txtComment.getText().toString().equals("")) {
+            if (comment.length() > 10) {
                 if (view.getContentDescription().equals("Si")) {
                     votar(2, txtComment.getText().toString());
                 } else {
                     votar(1, txtComment.getText().toString());
                 }
-            }else{
+            } else {
                 Print.dialog(Splash.this, "El comentario es muy corto");
             }
-        }else{
+        } else {
             Print.dialog(Splash.this, "Escribí un comentario");
         }
     }
 
     private void votar(final int i, final String comment) {
 
-        new AsyncTask<Void, Void, String>(){
+        new AsyncTask<Void, Void, String>() {
 
             JSONObject o;
+
             @Override
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
@@ -420,10 +421,10 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
             @Override
             protected void onPostExecute(String s) {
-                if(o.optString("result").equals("success")){
+                if (o.optString("result").equals("success")) {
                     Print.dialog(Splash.this, o.optString("result"));
 
-                }else{
+                } else {
                     Print.dialog(Splash.this, o.optString("result"));
                 }
                 super.onPostExecute(s);
@@ -431,7 +432,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         }.execute();
     }
 
-    public void openStats(View view){
+    public void openStats(View view) {
         Cons.results = info;
         startActivity(new Intent(Splash.this, Rank.class));
     }
@@ -451,8 +452,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         return true;
     }
 
-    private String getRegistrationId(Context context)
-    {
+    private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
@@ -468,48 +468,38 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         return registrationId;
     }
 
-    private SharedPreferences getGCMPreferences(Context context)
-    {
-        return getSharedPreferences(Splash.class.getSimpleName(),Context.MODE_PRIVATE);
+    private SharedPreferences getGCMPreferences(Context context) {
+        return getSharedPreferences(Splash.class.getSimpleName(), Context.MODE_PRIVATE);
     }
 
-    private static int getAppVersion(Context context)
-    {
-        try
-        {
+    private static int getAppVersion(Context context) {
+        try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return packageInfo.versionCode;
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
+        } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
 
 
-    private void registerInBackground()
-    {
-        new AsyncTask<Void,Void,Void>(){
+    private void registerInBackground() {
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
                 String msg = "";
-                try
-                {
-                    if (gcm == null)
-                    {
+                try {
+                    if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(context);
                     }
 
                     regid = gcm.register(SENDER_ID);
                     Log.d(TAG, "########################################");
-                    Log.d(TAG, "Current Device's Registration ID is: "+regid);
+                    Log.d(TAG, "Current Device's Registration ID is: " + regid);
                     Log.d(TAG, "########################################");
 
                     sendRegID();
-                }
-                catch (IOException ex)
-                {
+                } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
                 }
                 return null;
@@ -518,7 +508,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     }
 
     private void sendRegID() {
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
@@ -526,7 +516,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 try {
                     JSONParser parser = new JSONParser();
                     parser.get("http://coc.rhefew.com/reg_id.php?member=" + Cons.member + "&id=" + regid);
-                }catch(Exception e ){
+                } catch (Exception e) {
                     Log.e(getApplicationContext().getPackageName(), e.getMessage());
                     e.printStackTrace();
                 }
@@ -538,15 +528,15 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
     }
 
-    @Override protected void onResume()
-    {
+    @Override
+    protected void onResume() {
         super.onResume();
         checkPlayServices();
         refresh(null);
     }
 
-    public void openAdminPanel(View view){
-        if(Cons.member.toLowerCase().equals("rhefew")) {
+    public void openAdminPanel(View view) {
+        if (Cons.member.toLowerCase().equals("rhefew")) {
             Cons.results = info;
             startActivity(new Intent(Splash.this, AdminPanel.class));
         }
@@ -557,10 +547,10 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         /*unlocking achievements*/
         JSONObject achievements_stats = info.getAchievements_stats().optJSONObject(Cons.member);
-        if(achievements_stats != null){
+        if (achievements_stats != null) {
             int voteCount = achievements_stats.optInt("vote_count");
-            int votePositive= achievements_stats.optInt("vote_positive_count");
-            int voteNegative= achievements_stats.optInt("vote_negative_count");
+            int votePositive = achievements_stats.optInt("vote_positive_count");
+            int voteNegative = achievements_stats.optInt("vote_negative_count");
 
             unlockVoteAchievements(voteCount, votePositive, voteNegative);
         }
@@ -631,7 +621,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
     // Call when the sign-in button is clicked
     public void signInClicked(View v) {
-        SignInButton btn = (SignInButton)findViewById(R.id.btnSignIn);
+        SignInButton btn = (SignInButton) findViewById(R.id.btnSignIn);
         btn.setStyle(SignInButton.SIZE_ICON_ONLY, SignInButton.COLOR_DARK);
 
         mSignInClicked = true;
@@ -647,7 +637,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
     // Call when the sign-out button is clicked
     public void signOutclicked(View view) {
-        SignInButton btn = (SignInButton)findViewById(R.id.btnSignIn);
+        SignInButton btn = (SignInButton) findViewById(R.id.btnSignIn);
         btn.setStyle(SignInButton.SIZE_STANDARD, SignInButton.COLOR_LIGHT);
         mSignInClicked = false;
         Games.signOut(mGoogleApiClient);
@@ -659,5 +649,4 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             }
         });
     }
-
 }

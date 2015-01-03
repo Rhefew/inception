@@ -3,10 +3,12 @@ package com.rhefew.cocdrive.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rhefew.cocdrive.Cons;
@@ -16,6 +18,9 @@ import com.rhefew.cocdrive.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Created by rodrigo on 23/11/14.
  */
@@ -23,7 +28,7 @@ public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_user);
+        setContentView(R.layout.activity_login);
 
         final TextView txtShowRegister = (TextView)findViewById(R.id.txtShowRegister);
         txtShowRegister.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +47,8 @@ public class Login extends Activity {
 
             ((EditText)findViewById(R.id.txtUserName)).setText(sp.getString("member", ""));
         }
+
+        ((ImageView)findViewById(R.id.imgTroop)).setImageDrawable(getRandomTroop());
     }
 
     public void register(View view){
@@ -90,7 +97,6 @@ public class Login extends Activity {
         }
     }
 
-
     public void login(View view){
         final String user = ((EditText)findViewById(R.id.txtUserName)).getText().toString();
         final String password = ((EditText)findViewById(R.id.txtPassword1)).getText().toString();
@@ -113,8 +119,7 @@ public class Login extends Activity {
 
             @Override
             protected void onPostExecute(String s) {
-                if(o != null && !o.optString("result").equals("Usuario o contraseña incorrectos")){
-
+                if(o != null && o.optString("result").toUpperCase().equals(user.toUpperCase())){
 
                     SharedPreferences sp = getSharedPreferences("Inception", 0);
                     SharedPreferences.Editor editor = sp.edit();
@@ -131,5 +136,31 @@ public class Login extends Activity {
                 super.onPostExecute(s);
             }
         }.execute();
+    }
+
+
+
+    public Drawable getRandomTroop() {
+        ArrayList<Integer> troops = new ArrayList<Integer>();
+        troops.add(R.drawable.barbarian);
+        troops.add(R.drawable.archer);
+        troops.add(R.drawable.goblin);
+        troops.add(R.drawable.giant);
+        troops.add(R.drawable.wallbreaker);
+        troops.add(R.drawable.balloon);
+        troops.add(R.drawable.wizard);
+        troops.add(R.drawable.healer);
+        troops.add(R.drawable.dragon);
+        troops.add(R.drawable.pekka);
+        troops.add(R.drawable.minion);
+        troops.add(R.drawable.hogrider);
+        troops.add(R.drawable.valkirie);
+        troops.add(R.drawable.golem);
+        troops.add(R.drawable.witch);
+        troops.add(R.drawable.lavahound);
+
+        Random r = new Random();
+        int randomNumber = r.nextInt(16);
+        return getResources().getDrawable(troops.get(randomNumber));
     }
 }

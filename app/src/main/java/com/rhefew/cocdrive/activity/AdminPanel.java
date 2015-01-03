@@ -117,7 +117,7 @@ public class AdminPanel extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://coc.rhefew.com/update_war.php");
+                    o = parser.getJSON("http://coc.rhefew.com/update_war.php?war=" + Cons.results.getWar());
 
                 } catch (Exception e) {
                     o = new JSONObject();
@@ -142,7 +142,7 @@ public class AdminPanel extends Activity {
             protected String doInBackground(Void... params) {
                 JSONParser parser = new JSONParser();
                 try {
-                    o = parser.getJSON("http://coc.rhefew.com/new_war.php");
+                    o = parser.getJSON("http://coc.rhefew.com/new_war.php?war=" + Cons.results.getWar());
 
                 } catch (Exception e) {
                     o = new JSONObject();

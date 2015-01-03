@@ -78,7 +78,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:textColor="@android:color/white"
                 android:hint="Título"/>
 
             <EditText
@@ -86,7 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:textColor="@android:color/white"
                 android:hint="Mensaje"/>
 
             <Button
@@ -109,8 +107,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:id="@+id/">
+            android:padding="10dp">
 
             <Button
                 android:layout_width="0dp"
