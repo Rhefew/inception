@@ -109,6 +109,56 @@ public class AdminPanel extends Activity {
             }
         }.execute();
     }
+    public void updateWar(View view){
+        new AsyncTask<Void, Void, String>(){
+
+            JSONObject o;
+            @Override
+            protected String doInBackground(Void... params) {
+                JSONParser parser = new JSONParser();
+                try {
+                    o = parser.getJSON("http://coc.rhefew.com/update_war.php");
+
+                } catch (Exception e) {
+                    o = new JSONObject();
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if(o!=null)
+                    Print.dialog(AdminPanel.this, o.optString("result"));
+            }
+        }.execute();
+    }
+    public void newWar(View view){
+        new AsyncTask<Void, Void, String>(){
+
+            JSONObject o;
+            @Override
+            protected String doInBackground(Void... params) {
+                JSONParser parser = new JSONParser();
+                try {
+                    o = parser.getJSON("http://coc.rhefew.com/new_war.php");
+
+                } catch (Exception e) {
+                    o = new JSONObject();
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if(o!=null)
+                    Print.dialog(AdminPanel.this, o.optString("result"));
+            }
+        }.execute();
+    }
 }
 
 

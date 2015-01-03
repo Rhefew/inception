@@ -106,39 +106,29 @@
             android:padding="10dp"/>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:id="@+id/">
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:contentDescription="Actualizar Guerra"
                 android:layout_height="wrap_content"
-                android:text="Enviar"
+                android:text="Actualizar estado"
                 android:onClick="updateWar"/>
-        </LinearLayout>
-
-
-        <TextView android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New war"
-            android:background="@color/material_blue_grey_800"
-            android:textColor="@color/background_material_light"
-            android:padding="10dp"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:contentDescription="Actualizar Guerra"
                 android:layout_height="wrap_content"
-                android:text="Enviar"
+                android:text="Iniciar Nueva"
                 android:onClick="newWar"/>
         </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>
