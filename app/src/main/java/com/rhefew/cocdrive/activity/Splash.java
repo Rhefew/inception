@@ -32,10 +32,13 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.achievement.Achievements;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.plus.Plus;
+import com.google.example.games.basegameutils.BaseGameActivity;
 import com.google.example.games.basegameutils.BaseGameUtils;
+import com.google.example.games.basegameutils.GameHelper;
 import com.rhefew.cocdrive.ClanInfo;
 import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
@@ -73,7 +76,6 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     /*END GCM*/
 
     /*Google Play Game Services*/
-    private GoogleApiClient mGoogleApiClient;
     private static int RC_SIGN_IN = 9001;
     private boolean mResolvingConnectionFailure = false;
     boolean mAutoStartSignInflow = true;
@@ -86,12 +88,13 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
 
+
         setContentView(R.layout.activity_splash);
 
         actionBar = getActionBar();
 
         // Create the Google Api Client with access to Plus and Games
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        Cons.mGoogleClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
@@ -123,6 +126,11 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         Toast.makeText(getApplicationContext(), "Hola, " + Cons.member, Toast.LENGTH_LONG).show();
         if (Cons.member.toLowerCase().equals("rhefew")) {
             findViewById(R.id.imgAdmin).setVisibility(View.VISIBLE);
+        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Inception", 0);
+        if(sharedPreferences.getBoolean("google_connected", false)){
+            signInClicked(findViewById(R.id.btnSignIn));
         }
 
 
@@ -205,33 +213,43 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                     actionBar.setTitle(info.getStatus());
                     createStatsView();
                 }
+
+                 /*unlocking achievements*/
+
+                JSONObject achievements_stats = info.getAchievements_stats().optJSONObject(Cons.member);
+                if (achievements_stats != null) {
+                    int voteCount = achievements_stats.optInt("vote_count");
+                    int votePositive = achievements_stats.optInt("vote_positive_count");
+                    int voteNegative = achievements_stats.optInt("vote_negative_count");
+
+                    unlockVoteAchievements(voteCount, votePositive, voteNegative);
+
+                }
+
             }
+
+
         }.execute();
     }
 
     private void unlockVoteAchievements(int voteCount, int votePositive, int voteNegative) {
-        if (voteCount > 0) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_novato));
+        if(Cons.mGoogleClient.isConnected()) {
+            if (voteCount > 0) {
+                Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_votante_novato));
+            }
+            if (votePositive >= 5) {
+                Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_guerrero));
+            }
+            if (votePositive >= 10) {
+                Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_hroe));
+            }
+            if (voteNegative >= 5) {
+                Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_aguafiestas));
+            }
+            if (voteNegative >= 10) {
+                Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_pacifista));
+            }
         }
-        if (voteCount >= 5) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_casual));
-        }
-        if (voteCount >= 20) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_votante_experto));
-        }
-        if (votePositive >= 5) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_guerrero));
-        }
-        if (votePositive >= 10) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_hroe));
-        }
-        if (voteNegative >= 5) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_aguafiestas));
-        }
-        if (voteNegative >= 10) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_pacifista));
-        }
-        Games.Leaderboards.loadCurrentPlayerLeaderboardScore(mGoogleApiClient, "Logros", 0, 0);
     }
 
     private void displayVotationControls() {
@@ -330,7 +348,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 int minutes = (int) ((millis / (1000 * 60)) % 60);
                 int hours = (int) ((millis / (1000 * 60 * 60)) % 24);
                 String text = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                ((TextView) findViewById(R.id.txtTimer)).setText(text);
+                ((TextView) findViewById(R.id.txtTimer)).setText("Faltan " + text);
             }
 
             @Override
@@ -362,7 +380,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        for (int c : ColorTemplate.PASTEL_COLORS)
+        for (int c : ColorTemplate.GOOGLE_COLORS)
             colors.add(c);
 
         set1.setColors(colors);
@@ -412,6 +430,22 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 try {
                     o = parser.getJSON("http://coc.rhefew.com/send_vote.php?member=" + Cons.member + "&value=" + i + "&comment=" + comment.replaceAll(" ", "%20"));
 
+                    if(comment.length() >= 100){
+                        Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_literato));
+                    }
+
+                    SharedPreferences sp = getSharedPreferences("Inception", 0);
+                    if(!sp.getBoolean("voted_war_" + info.getWar(), false)){
+                        Games.Achievements.increment(Cons.mGoogleClient, getString(R.string.achievement_votante_casual), 1);
+                        Games.Achievements.increment(Cons.mGoogleClient, getString(R.string.achievement_votante_experto), 1);
+                        if(i==1){
+                            Games.Achievements.increment(Cons.mGoogleClient, getString(R.string.achievement_aguafiestas), 1);
+                            Games.Achievements.increment(Cons.mGoogleClient, getString(R.string.achievement_pacifista), 1);
+                        }
+
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putBoolean("voted_war_" + info.getWar(), true);
+                    }
                 } catch (Exception e) {
                     o = new JSONObject();
                 }
@@ -532,7 +566,6 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     protected void onResume() {
         super.onResume();
         checkPlayServices();
-        refresh(null);
     }
 
     public void openAdminPanel(View view) {
@@ -545,23 +578,19 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     @Override
     public void onConnected(Bundle bundle) {
 
-        /*unlocking achievements*/
-        JSONObject achievements_stats = info.getAchievements_stats().optJSONObject(Cons.member);
-        if (achievements_stats != null) {
-            int voteCount = achievements_stats.optInt("vote_count");
-            int votePositive = achievements_stats.optInt("vote_positive_count");
-            int voteNegative = achievements_stats.optInt("vote_negative_count");
+        SharedPreferences sharedPreferences = getSharedPreferences("Inception", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("google_connected", true);
+        editor.commit();
 
-            unlockVoteAchievements(voteCount, votePositive, voteNegative);
-        }
-
+        findViewById(R.id.viewAchievements).setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
 
         // Attempt to reconnect
-        mGoogleApiClient.connect();
+        Cons.mGoogleClient.connect();
     }
 
     @Override
@@ -583,7 +612,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             // error string in your strings.xml file, such as "There was
             // an issue with sign-in, please try again later."
             if (!BaseGameUtils.resolveConnectionFailure(this,
-                    mGoogleApiClient, connectionResult,
+                    Cons.mGoogleClient, connectionResult,
                     RC_SIGN_IN, "Error al conectarse con google play services")) {
                 mResolvingConnectionFailure = false;
             }
@@ -598,7 +627,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             mSignInClicked = false;
             mResolvingConnectionFailure = false;
             if (resultCode == RESULT_OK) {
-                mGoogleApiClient.connect();
+                Cons.mGoogleClient.connect();
 
             } else {
                 // Bring up an error dialog to alert the user that sign-in
@@ -614,25 +643,13 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
     @Override
     protected void onStop() {
         super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
     }
 
     // Call when the sign-in button is clicked
     public void signInClicked(View v) {
-        SignInButton btn = (SignInButton) findViewById(R.id.btnSignIn);
-        btn.setStyle(SignInButton.SIZE_ICON_ONLY, SignInButton.COLOR_DARK);
-
+        v.setVisibility(View.GONE);
         mSignInClicked = true;
-        mGoogleApiClient.connect();
-
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOutclicked(v);
-            }
-        });
+        Cons.mGoogleClient.connect();
     }
 
     // Call when the sign-out button is clicked
@@ -640,13 +657,11 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
         SignInButton btn = (SignInButton) findViewById(R.id.btnSignIn);
         btn.setStyle(SignInButton.SIZE_STANDARD, SignInButton.COLOR_LIGHT);
         mSignInClicked = false;
-        Games.signOut(mGoogleApiClient);
+        Games.signOut(Cons.mGoogleClient);
         Print.dialog(Splash.this, "Te desconectaste de Google+");
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInClicked(v);
-            }
-        });
+    }
+
+    public void gameServicesGetAchievements(View view) {
+        startActivityForResult(Games.Achievements.getAchievementsIntent(Cons.mGoogleClient), 555);
     }
 }

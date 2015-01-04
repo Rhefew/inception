@@ -12,7 +12,9 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/linearButtons">
+        android:id="@+id/linearButtons"
+        android:weightSum="10"
+        android:layout_above="@+id/llVotationControls">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -58,14 +60,31 @@
                 android:visibility="invisible" />
 
             <view
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    class="com.google.android.gms.common.SignInButton"
-                    android:id="@+id/btnSignIn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                class="com.google.android.gms.common.SignInButton"
+                android:id="@+id/btnSignIn"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_weight="7" />
+                android:layout_weight="7"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/viewAchievements"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_weight="7"
+                android:text="Ver logros"
+                android:textColor="#fff"
+                android:background="#E26758"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:onClick="gameServicesGetAchievements"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -86,7 +105,9 @@
                 android:textSize="10sp"
                 android:textStyle="italic"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_gravity="center" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart"
@@ -100,54 +121,54 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llVotationControls"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="2"
+        android:visibility="visible">
+
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/llVotationControls"
-            android:visibility="gone"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:id="@+id/txtCommentSplash"
+            android:hint="Ingrese un comentario" />
 
-            <EditText
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtCommentSplash"
-                android:hint="Ingrese un comentario" />
+                android:text="No"
+                android:id="@+id/button"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:contentDescription="No"
+                android:onClick="vote"
+                android:layout_weight="0.2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="No"
-                    android:id="@+id/button"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:contentDescription="No"
-                    android:onClick="vote"
-                    android:layout_weight="0.2" />
-
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Si"
-                    android:id="@+id/button2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:contentDescription="Si"
-                    android:onClick="vote"
-                    android:layout_weight="0.2" />
-
-            </LinearLayout>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Si"
+                android:id="@+id/button2"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="Si"
+                android:onClick="vote"
+                android:layout_weight="0.2" />
 
         </LinearLayout>
 

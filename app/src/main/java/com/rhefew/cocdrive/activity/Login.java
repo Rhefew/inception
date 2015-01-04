@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,6 +50,27 @@ public class Login extends Activity {
         }
 
         ((ImageView)findViewById(R.id.imgTroop)).setImageDrawable(getRandomTroop());
+        getPasswrodCheckState();
+
+    }
+
+    private void getPasswrodCheckState() {
+        SharedPreferences sp = getSharedPreferences("Inception", 0);
+
+        if(sp.getString("remember_password", "").equals("")){
+            ((CheckBox)findViewById(R.id.checkPassword)).setChecked(true);
+        }
+
+
+    }
+
+    private void setPasswordCheckState(){
+        if(((CheckBox)findViewById(R.id.checkPassword)).isChecked()) {
+            SharedPreferences sp = getSharedPreferences("Inception", 0);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("remember_password", ((CheckBox) findViewById(R.id.checkPassword)).isChecked() ? ((EditText) findViewById(R.id.txtPassword1)).getText().toString() : "");
+            editor.commit();
+        }
     }
 
     public void register(View view){
@@ -109,6 +131,7 @@ public class Login extends Activity {
                 JSONParser parser = new JSONParser();
                 try {
                     o = parser.getJSON("http://coc.rhefew.com/login.php?member=" + user + "&password=" + password );
+                    setPasswordCheckState();
 
                 } catch (Exception e) {
                     o = new JSONObject();
