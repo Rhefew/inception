@@ -159,14 +159,9 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
-                if (info.getStatus_code() == 1) {
+                if(info.getStatus_code() == 1) {
                     initCountDown();
                     displayVotationControls();
-                }
-
-                actionBar.setTitle(info.getStatus());
-
-                if (info.getStatus_code() == 1 || info.getStatus_code() == 2) {
 
                     initPieChart();
 
@@ -207,12 +202,17 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                     } else {
                         Print.dialog(Splash.this, "No se realizaron votaciones");
                     }
-
-
-                } else {
-                    actionBar.setTitle(info.getStatus());
+                }else if(info.getStatus_code() ==2){
+                    createTroopsView();
+                    hideVotationControls();
+                }else{
                     createStatsView();
+                    hideVotationControls();
                 }
+
+
+
+                actionBar.setTitle(info.getStatus());
 
                  /*unlocking achievements*/
 
@@ -231,6 +231,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
         }.execute();
     }
+
 
     private void unlockVoteAchievements(int voteCount, int votePositive, int voteNegative) {
         if(Cons.mGoogleClient.isConnected()) {
@@ -254,6 +255,10 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
     private void displayVotationControls() {
         findViewById(R.id.llVotationControls).setVisibility(View.VISIBLE);
+    }
+
+    private void hideVotationControls() {
+        findViewById(R.id.llVotationControls).setVisibility(View.GONE);
     }
 
     private void createStatsView() {
@@ -286,6 +291,10 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
                 super.onPostExecute(aVoid);
             }
         }.execute();
+    }
+
+    private void createTroopsView() {
+
     }
 
     private void initPieChart() {

@@ -43,12 +43,6 @@ public class Login extends Activity {
         });
 
 
-        SharedPreferences sp = getSharedPreferences("Inception", 0);
-        if(sp.getBoolean("registered", false)){
-
-            ((EditText)findViewById(R.id.txtUserName)).setText(sp.getString("member", ""));
-        }
-
         ((ImageView)findViewById(R.id.imgTroop)).setImageDrawable(getRandomTroop());
         getPasswrodCheckState();
 
@@ -56,19 +50,29 @@ public class Login extends Activity {
 
     private void getPasswrodCheckState() {
         SharedPreferences sp = getSharedPreferences("Inception", 0);
+        if(sp.getBoolean("registered", false)){
 
-        if(sp.getString("remember_password", "").equals("")){
+            ((EditText)findViewById(R.id.txtUserName)).setText(sp.getString("member", ""));
+        }
+
+        if(!sp.getString("remember_password", "").equals("")){
             ((CheckBox)findViewById(R.id.checkPassword)).setChecked(true);
+            ((EditText)findViewById(R.id.txtPassword1)).setText(sp.getString("remember_password", ""));
+
         }
 
 
     }
 
     private void setPasswordCheckState(){
+        SharedPreferences sp = getSharedPreferences("Inception", 0);
+        SharedPreferences.Editor editor = sp.edit();
         if(((CheckBox)findViewById(R.id.checkPassword)).isChecked()) {
-            SharedPreferences sp = getSharedPreferences("Inception", 0);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString("remember_password", ((CheckBox) findViewById(R.id.checkPassword)).isChecked() ? ((EditText) findViewById(R.id.txtPassword1)).getText().toString() : "");
+
+            editor.putString("remember_password", ((EditText) findViewById(R.id.txtPassword1)).getText().toString());
+            editor.commit();
+        }else{
+            editor.remove("remember_password");
             editor.commit();
         }
     }

@@ -42,7 +42,7 @@ public class AdminPanel extends Activity {
             members[i] = Cons.results.getMembers().optString(i);
         }
 
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getApplicationContext(), android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item);
         adapter.addAll(members);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

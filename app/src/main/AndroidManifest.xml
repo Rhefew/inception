@@ -58,6 +58,7 @@
         <activity android:name=".activity.Rank"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.AdminPanel"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:screenOrientation="portrait"/>
     </application>
 
