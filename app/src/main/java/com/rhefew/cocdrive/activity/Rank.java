@@ -40,17 +40,6 @@ public class Rank extends Activity {
             JSONObject member = Cons.results.getMember_stars().optJSONObject(String.valueOf(i+1));
             String nickName = member.optString("member");
 
-            if(Cons.mGoogleClient.isConnected()) {
-                if (i == 0 && Cons.member.toUpperCase().equals(nickName.toUpperCase()))
-                    Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_dorado));
-
-                if (i == 1 && Cons.member.toUpperCase().equals(nickName.toUpperCase()))
-                    Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_plateado));
-
-                if (i == 2 && Cons.member.toUpperCase().equals(nickName.toUpperCase()))
-                    Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_bronceado));
-            }
-
             String stars = member.optString("total_stars");
             try {
 

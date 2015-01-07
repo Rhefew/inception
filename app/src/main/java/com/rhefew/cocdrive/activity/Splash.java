@@ -44,6 +44,7 @@ import com.rhefew.cocdrive.Cons;
 import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
 import com.rhefew.cocdrive.R;
+import com.rhefew.cocdrive.RankView;
 import com.rhefew.cocdrive.WarStats;
 import com.rhefew.cocdrive.WarStatsView;
 
@@ -249,6 +250,29 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             }
             if (voteNegative >= 10) {
                 Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_pacifista));
+            }
+        }
+
+        for(int i=0; i< info.getMember_stars().length(); i++){
+
+            /*Adding activity_results to ResultsView rows*/
+            JSONObject member = info.getMember_stars().optJSONObject(String.valueOf(i+1));
+            String nickName = member.optString("member");
+
+            if(Cons.mGoogleClient.isConnected()) {
+                if (i >=0 && i <=2 && Cons.member.toUpperCase().equals(nickName.toUpperCase())) {
+                    switch (i) {
+                        case 0:
+                            Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_dorado));
+                            break;
+                        case 1:
+                            Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_plateado));
+                            break;
+                        case 2:
+                            Games.Achievements.unlock(Cons.mGoogleClient, getString(R.string.achievement_bronceado));
+                            break;
+                    }
+                }
             }
         }
     }
