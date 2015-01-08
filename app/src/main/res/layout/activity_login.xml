@@ -64,6 +64,9 @@
                 android:checked="false" />
 
             <Button
+                android:layout_margin="1dp"
+                android:background="@drawable/back_buttons"
+                android:textColor="#e8e8e8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Ingresar"

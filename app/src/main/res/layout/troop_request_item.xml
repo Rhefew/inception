@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#e8e8e8"
-    android:padding="10dp"
+    android:padding="5dp"
     android:weightSum="10">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:id="@+id/imgTroopItem"
         android:src="@drawable/barbarian"
         android:background="@drawable/back_buttons"
-        android:padding="4dp" />
+        android:padding="3dp" />
 
     <LinearLayout
         android:layout_weight="5"

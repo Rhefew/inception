@@ -10,6 +10,7 @@
 
     <item android:state_pressed="true">
         <shape>
+            <corners android:radius="10dp" />
             <solid android:color="#ffe29c7e" />
         </shape>
     </item>

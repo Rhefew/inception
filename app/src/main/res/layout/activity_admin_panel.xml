@@ -40,6 +40,9 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:layout_margin="1dp"
+                    android:background="@drawable/back_buttons"
+                    android:textColor="#e8e8e8"
                     android:layout_width="0dp"
                     android:contentDescription="No"
                     android:layout_weight="1"
@@ -48,6 +51,9 @@
                     android:onClick="adminVote"
                     android:id="@+id/btnVotoNo"/>
                 <Button
+                    android:layout_margin="1dp"
+                    android:background="@drawable/back_buttons"
+                    android:textColor="#e8e8e8"
                     android:layout_width="0dp"
                     android:contentDescription="Si"
                     android:layout_weight="1"
@@ -88,6 +94,9 @@
                 android:hint="Mensaje"/>
 
             <Button
+                android:layout_margin="1dp"
+                android:background="@drawable/back_buttons"
+                android:textColor="#e8e8e8"
                 android:layout_width="match_parent"
                 android:contentDescription="Si"
                 android:layout_height="wrap_content"
@@ -110,6 +119,9 @@
             android:padding="10dp">
 
             <Button
+                android:layout_margin="1dp"
+                android:background="@drawable/back_buttons"
+                android:textColor="#e8e8e8"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:contentDescription="Actualizar Guerra"
@@ -118,6 +130,9 @@
                 android:onClick="updateWar"/>
 
             <Button
+                android:layout_margin="1dp"
+                android:background="@drawable/back_buttons"
+                android:textColor="#e8e8e8"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:contentDescription="Actualizar Guerra"

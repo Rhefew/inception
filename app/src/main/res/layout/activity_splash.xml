@@ -71,14 +71,15 @@
                 android:visibility="visible" />
 
             <TextView
+                android:layout_margin="1dp"
+                android:background="@drawable/back_buttons"
+                android:textColor="#e8e8e8"
                 android:id="@+id/viewAchievements"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:layout_weight="7"
                 android:text="Ver logros"
-                android:textColor="#fff"
-                android:background="#E26758"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_gravity="center"
