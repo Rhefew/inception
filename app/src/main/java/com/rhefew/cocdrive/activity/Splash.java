@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,10 +42,14 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 import com.google.example.games.basegameutils.GameHelper;
 import com.rhefew.cocdrive.ClanInfo;
 import com.rhefew.cocdrive.Cons;
+import com.rhefew.cocdrive.Donation;
 import com.rhefew.cocdrive.JSONParser;
 import com.rhefew.cocdrive.Print;
 import com.rhefew.cocdrive.R;
 import com.rhefew.cocdrive.RankView;
+import com.rhefew.cocdrive.Troop;
+import com.rhefew.cocdrive.TroopsView;
+import com.rhefew.cocdrive.ViewParams;
 import com.rhefew.cocdrive.WarStats;
 import com.rhefew.cocdrive.WarStatsView;
 
@@ -160,6 +165,7 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 
+                info.setStatus_code(2);
                 if(info.getStatus_code() == 1) {
                     initCountDown();
                     displayVotationControls();
@@ -319,6 +325,21 @@ public class Splash extends Activity implements GoogleApiClient.ConnectionCallba
 
     private void createTroopsView() {
 
+        LinearLayout llMasterDetails = (LinearLayout) findViewById(R.id.llMasterDetails);
+        llMasterDetails.removeAllViews();
+
+        Donation donation = new Donation(25);
+        ScrollView scrollView = new ScrollView(Splash.this);
+        LinearLayout holder = new LinearLayout(getApplicationContext());
+        holder.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(holder);
+        ViewParams.layoutParams(holder, ViewParams.Match);
+        ViewParams.layoutParams(scrollView, ViewParams.Match);
+        for (int i =0; i<Troop.Type.values().length; i++){
+            holder.addView(new TroopsView(Splash.this, new Troop(Troop.Type.values()[i]), donation));
+        }
+
+        llMasterDetails.addView(scrollView);
     }
 
     private void initPieChart() {
